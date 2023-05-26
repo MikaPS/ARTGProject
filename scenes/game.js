@@ -33,7 +33,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
       let piece5 = this.add.rectangle(this.w*0.64,this.h*0.2,this.w*0.2, this.h*0.3, 0xff0000);
       let piece6 = this.add.rectangle(this.w*0.64,this.h*0.52,this.w*0.2, this.h*0.3, 0xff0000);
 
-      let page1 = this.add.rectangle(this.w*0.1,this.h*0.8,this.w*0.1, this.h*0.2, 0xffff00)
+      let page1 = this.add.rectangle(this.w*0.1,this.h*0.85,this.w*0.15, this.h*0.25, 0xffff00)
         .setInteractive()
         .on('pointerdown', () => {
             currentPage = page1;
@@ -45,12 +45,12 @@ class LibraryPagePuzzle extends Phaser.Scene {
 
   checkPage(piece, page) {
     if (piece == 1) {
-      page.x = this.w*0.15;
-      page.y = this.h*0.15;
+      page.x = this.w*0.2;
+      page.y = this.h*0.2;
     }
     else if (piece == 2) {
-      page.x = this.w*0.15;
-      page.y = this.h*0.47;
+      page.x = this.w*0.2;
+      page.y = this.h*0.52;
     }
   }
 }
