@@ -3,7 +3,6 @@ class LibraryPagePuzzle extends Phaser.Scene {
       super('LibraryPagePuzzle');
   }
  
-
   preload() {
       // this.load.image('boat', './assets/boat/woodboat.png');
       // this.load.image('background', './assets/bg.jpeg'); 
@@ -88,10 +87,7 @@ class LibraryLock extends Phaser.Scene {
       this.playerAnswers = [0,0,0,0];
   }
  
-
   preload() {
-      // this.load.image('boat', './assets/boat/woodboat.png');
-      // this.load.image('background', './assets/bg.jpeg'); 
   }
 
   create() {
@@ -121,13 +117,13 @@ class LibraryLock extends Phaser.Scene {
 
       let nextText = this.add.text(this.w*0.87, this.h*0.48, "Next", { fill: '#0ff000' }).setFontSize(50);
 
-      let restart = this.add.rectangle(this.w*0.9,this.h*0.06,this.w*0.1, this.h*0.1, 0xffffff)
-        .setInteractive()
-        .on('pointerdown', () => {
-          this.scene.restart();
-        });
-
-      let restartText = this.add.text(this.w*0.85, this.h*0.04, "Restart?", { fill: '#0ff000' }).setFontSize(40);
+      // let restart = this.add.rectangle(this.w*0.9,this.h*0.06,this.w*0.1, this.h*0.1, 0xffffff)
+      //   .setInteractive()
+      //   .on('pointerdown', () => {
+      //     this.scene.restart();
+      //   });
+      // let restartText = this.add.text(this.w*0.85, this.h*0.04, "Restart?", { fill: '#0ff000' }).setFontSize(40);
+      
       this.correctAnswers[0] = adj1;
       this.correctAnswers[1] = adj2;
       this.correctAnswers[2] = adj3;

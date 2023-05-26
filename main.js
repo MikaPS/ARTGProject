@@ -17,8 +17,7 @@ let config = {
             }
         }
     },
-    scene: [LibraryLock, LibraryPagePuzzle]
-    // scene: [Instructions]
+    scene: [LibraryPagePuzzle, LibraryLock]
 };
 
 let game = new Phaser.Game(config);
