@@ -17,7 +17,7 @@ let config = {
             }
         }
     },
-    scene: [LibraryPagePuzzle]
+    scene: [LibraryLock, LibraryPagePuzzle]
     // scene: [Instructions]
 };
 
