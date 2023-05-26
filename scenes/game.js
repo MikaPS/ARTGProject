@@ -13,7 +13,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
       this.h = this.cameras.main.height;
       let currentPage = 0;
       let currentPiece = 0;
-      let piece1 = this.add.rectangle(this.w*0.2,this.h*0.2,this.w*0.2, this.h*0.3, 0xff0000)
+      let piece1 = this.add.rectangle(this.w*0.2,this.h*0.2,this.w*0.2, this.h*0.3, 0x000000)
         .setInteractive()
         .on('pointerdown', () => {
           currentPiece = 1;
@@ -21,7 +21,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
           console.log("placing page");
           this.highlightPuzzle(piece1, piece2, 0xff0000);
         });
-      let piece2 = this.add.rectangle(this.w*0.2,this.h*0.52,this.w*0.2, this.h*0.3, 0xff0000)
+      let piece2 = this.add.rectangle(this.w*0.2,this.h*0.52,this.w*0.2, this.h*0.3, 0x000000)
         .setInteractive()
           .on('pointerdown', () => {
             currentPiece = 2;
@@ -50,13 +50,13 @@ class LibraryPagePuzzle extends Phaser.Scene {
             console.log("select the right tile");
         });
 
-      let next = this.add.rectangle(this.w*0.9,this.h*0.5,this.w*0.1, this.h*0.1, 0xffffff)
-        .setInteractive()
-        .on('pointerdown', () => {
-          this.scene.start("LibraryLock");
-        });
+      // let next = this.add.rectangle(this.w*0.9,this.h*0.5,this.w*0.1, this.h*0.1, 0xffffff)
+      //   .setInteractive()
+      //   .on('pointerdown', () => {
+      //     this.scene.start("LibraryLock");
+      //   });
 
-      let nextText = this.add.text(this.w*0.87, this.h*0.48, "Next", { fill: '#0ff000' }).setFontSize(50);
+      // let nextText = this.add.text(this.w*0.87, this.h*0.48, "Next", { fill: '#0ff000' }).setFontSize(50);
     
   } 
   update() {    }
@@ -124,10 +124,10 @@ class LibraryLock extends Phaser.Scene {
       //   });
       // let restartText = this.add.text(this.w*0.85, this.h*0.04, "Restart?", { fill: '#0ff000' }).setFontSize(40);
       
-      this.correctAnswers[0] = adj1;
-      this.correctAnswers[1] = adj2;
-      this.correctAnswers[2] = adj3;
-      this.correctAnswers[3] = adj4;
+      this.correctAnswers[0] = adj1.text;
+      this.correctAnswers[1] = adj2.text;
+      this.correctAnswers[2] = adj3.text;
+      this.correctAnswers[3] = adj4.text;
 
 
   } 
@@ -144,22 +144,22 @@ class LibraryLock extends Phaser.Scene {
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
     if (this.current == 1) {
-      this.playerAnswers[0] = adj;
+      this.playerAnswers[0] = adj.text;
       this.current += 1;
       adj.x = this.w*0.4;
       adj.y = this.h*0.15;
     } else if (this.current == 2) {
-      this.playerAnswers[1] = adj;
+      this.playerAnswers[1] = adj.text;
       this.current += 1;
       adj.x = this.w*0.55;
       adj.y = this.h*0.15;
     } else if (this.current == 3) {
-      this.playerAnswers[2] = adj;
+      this.playerAnswers[2] = adj.text;
       this.current += 1;
       adj.x = this.w*0.7;
       adj.y = this.h*0.15;
     } else if (this.current == 4) {
-      this.playerAnswers[3] = adj;
+      this.playerAnswers[3] = adj.text;
       this.current += 1;
       adj.x = this.w*0.85;
       adj.y = this.h*0.15;
@@ -173,7 +173,7 @@ class LibraryLock extends Phaser.Scene {
   
     var sortedArray1 = this.correctAnswers.sort();
     var sortedArray2 = this.playerAnswers.sort();
-  
+    
     for (var i = 0; i < sortedArray1.length; i++) {
       if (sortedArray1[i] !== sortedArray2[i]) {
         return false;
