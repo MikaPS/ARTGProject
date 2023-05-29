@@ -17,6 +17,7 @@ let config = {
             }
         }
     },
+    // scene: [LibraryInside, LibraryHelpDesk, LibraryLock, LibraryPagePuzzle]
     scene: [Fight, Win, Lose]
 };
 

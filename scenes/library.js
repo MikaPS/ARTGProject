@@ -1,3 +1,27 @@
+class LibraryInside extends Phaser.Scene {
+  constructor() {
+    super('LibraryInside');
+  }
+
+  preload() {
+    this.load.image('background', './assets/library/lib.png');
+  }
+
+  create() {
+    this.w = this.cameras.main.width;
+    this.h = this.cameras.main.height;
+    let bg = this.add.image(this.w*0.3,this.h*0.5, 'background').setScale(1.05).setDepth(1);
+    this.add.text(this.w*0.6, this.h*0.1, "The library of Atlantis,one of\nthe most treasured places in\nthe universe.\n\nIt has the know-all blue orb,\nthat can help you find what you\nare looking for.").setFontSize(40);
+
+    this.add.rectangle(this.w*0.355, this.h*0.68, this.w*0.05, this.h*0.1, 0xff0000)
+        .setInteractive()
+        .on('pointerdown', () => {
+          this.scene.start("LibraryHelpDesk");
+        });
+  }
+}
+
+
 class LibraryHelpDesk extends Phaser.Scene {
   constructor() {
     super('LibraryHelpDesk');
@@ -5,24 +29,31 @@ class LibraryHelpDesk extends Phaser.Scene {
     this.route = 0;
   }
 
-  preload() {}
+  preload() {
+    this.load.image('background', './assets/library/lib.png');
+  }
 
   create() {
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
-    this.add.rectangle(this.w*0.5, this.h*0.75, this.w*0.9, this.h*0.35, 0x0000ff)
+    let bg = this.add.image(this.w*0.5,this.h*0.1, 'background').setScale(2).setDepth(-1);
+
+    this.add.rectangle(this.w*0.5, this.h*0.75, this.w*0.9, this.h*0.35, 0x0000ff).setAlpha(0.65)
       .setInteractive()
       .on('pointerdown', () => {
         this.click += 1;
       });
+    this.add.rectangle(this.w*0.43, this.h*0.14, this.w*0.8, this.h*0.15, 0x000000).setAlpha(0.65);
+    this.add.text(this.w*0.05, this.h*0.1, "* Click on the blue rectangle to move on...\nWhen you are given an option, click on the text that fits you\n").setFontSize(40);
 
-        this.help1 = this.add.text(this.w*0.1, this.h*0.73, "What are you looking to find?").setFontSize(60);
-        this.answer1 = this.add.text(this.w*0.1, this.h*0.67, "1) How to stop the summoning of the deity?").setFontSize(60).setAlpha(0);
-        this.answer2 = this.add.text(this.w*0.1, this.h*0.8, "2) How to fight the deity?").setFontSize(60).setAlpha(0);
-        this.help2 = this.add.text(this.w*0.1, this.h*0.73, "Unfortunately, this information is hidden\nfrom the average citizen of Atlantis…").setFontSize(60).setAlpha(0);
-        this.help3 = this.add.text(this.w*0.1, this.h*0.73, "If you are determined enough,\nfind the locked books section.").setFontSize(60).setAlpha(0);
-        this.help4 = this.add.text(this.w*0.1, this.h*0.73, "Find the red and blue book.").setFontSize(60).setAlpha(0);
-        this.help5 = this.add.text(this.w*0.1, this.h*0.73, "Find the green and gold book.").setFontSize(60).setAlpha(0);
+
+    this.help1 = this.add.text(this.w*0.1, this.h*0.73, "What are you looking to find?").setFontSize(60);
+    this.answer1 = this.add.text(this.w*0.1, this.h*0.67, "1) How to stop the summoning of the deity?").setFontSize(60).setAlpha(0);
+    this.answer2 = this.add.text(this.w*0.1, this.h*0.8, "2) How to fight the deity?").setFontSize(60).setAlpha(0);
+    this.help2 = this.add.text(this.w*0.1, this.h*0.7, "Unfortunately, this information is hidden\nfrom the average citizen of Atlantis…").setFontSize(60).setAlpha(0);
+    this.help3 = this.add.text(this.w*0.1, this.h*0.7, "If you are determined enough,\nfind the locked books section.").setFontSize(60).setAlpha(0);
+    this.help4 = this.add.text(this.w*0.1, this.h*0.73, "Read the red and blue book.").setFontSize(60).setAlpha(0);
+    this.help5 = this.add.text(this.w*0.1, this.h*0.73, "Read the green and gold book.").setFontSize(60).setAlpha(0);
   }
 
   update() {
@@ -59,6 +90,8 @@ class LibraryHelpDesk extends Phaser.Scene {
       } else {
         this.help5.setAlpha(1);
       }
+    } else if (this.click ==5) {
+      this.scene.start("LibraryInside");
     }
   }
 }
