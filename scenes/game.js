@@ -1,3 +1,70 @@
+class LibraryHelpDesk extends Phaser.Scene {
+  constructor() {
+    super('LibraryHelpDesk');
+    this.click = 0;
+    this.route = 0;
+  }
+
+  preload() {}
+
+  create() {
+    this.w = this.cameras.main.width;
+    this.h = this.cameras.main.height;
+    this.add.rectangle(this.w*0.5, this.h*0.75, this.w*0.9, this.h*0.35, 0x0000ff)
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.click += 1;
+      });
+
+        this.help1 = this.add.text(this.w*0.1, this.h*0.73, "What are you looking to find?").setFontSize(60);
+        this.answer1 = this.add.text(this.w*0.1, this.h*0.67, "1) How to stop the summoning of the deity?").setFontSize(60).setAlpha(0);
+        this.answer2 = this.add.text(this.w*0.1, this.h*0.8, "2) How to fight the deity?").setFontSize(60).setAlpha(0);
+        this.help2 = this.add.text(this.w*0.1, this.h*0.73, "Unfortunately, this information is hidden\nfrom the average citizen of Atlantis…").setFontSize(60).setAlpha(0);
+        this.help3 = this.add.text(this.w*0.1, this.h*0.73, "If you are determined enough,\nfind the locked books section.").setFontSize(60).setAlpha(0);
+        this.help4 = this.add.text(this.w*0.1, this.h*0.73, "Find the red and blue book.").setFontSize(60).setAlpha(0);
+        this.help5 = this.add.text(this.w*0.1, this.h*0.73, "Find the green and gold book.").setFontSize(60).setAlpha(0);
+    
+  
+    }
+  update() {
+    this.changeText();
+  }
+    
+  changeText() {
+    if (this.click == 1) {
+      this.help1.destroy();
+      this.answer1.setAlpha(1).setInteractive()
+        .on('pointerdown', () => {
+          this.route = 1;
+          this.click = 2;
+        });
+      this.answer2.setAlpha(1).setInteractive()
+      .on('pointerdown', () => {
+        this.route = 2;
+        this.click = 2;
+      });
+    }
+    if (this.click == 2) {
+      this.answer1.destroy();
+      this.answer2.destroy();
+      this.help2.setAlpha(1);
+    }
+    else if (this.click == 3) {
+      this.help2.destroy();
+      this.help3.setAlpha(1);
+    }
+    else if (this.click == 4) {
+      this.help3.destroy();
+      if (this.route == 1) {
+        this.help4.setAlpha(1);
+      } else {
+        this.help5.setAlpha(1);
+      }
+    }
+  }
+}
+
+
 class LibraryPagePuzzle extends Phaser.Scene {
   constructor() {
       super('LibraryPagePuzzle');
