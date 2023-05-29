@@ -4,8 +4,13 @@ class LibraryPagePuzzle extends Phaser.Scene {
   }
  
   preload() {
-      // this.load.image('boat', './assets/boat/woodboat.png');
-      // this.load.image('background', './assets/bg.jpeg'); 
+      this.load.image('page1', './assets/library/rock.png');
+      this.load.image('page2', './assets/library/rock.png');
+      this.load.image('page3', './assets/library/rock.png');
+      this.load.image('page4', './assets/library/rock.png');
+      this.load.image('page5', './assets/library/rock.png');
+      this.load.image('page6', './assets/library/rock.png');
+
   }
 
   create() {
@@ -13,68 +18,153 @@ class LibraryPagePuzzle extends Phaser.Scene {
       this.h = this.cameras.main.height;
       let currentPage = 0;
       let currentPiece = 0;
-      let piece1 = this.add.rectangle(this.w*0.2,this.h*0.2,this.w*0.2, this.h*0.3, 0x000000)
+      let piece1 = this.add.rectangle(this.w*0.13,this.h*0.18,this.w*0.2, this.h*0.3, 0x000000)
         .setInteractive()
         .on('pointerdown', () => {
           currentPiece = 1;
           this.checkPage(currentPiece, currentPage)
-          console.log("placing page");
-          this.highlightPuzzle(piece1, piece2, 0xff0000);
+          // console.log("placing page");
+          this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
         });
-      let piece2 = this.add.rectangle(this.w*0.2,this.h*0.52,this.w*0.2, this.h*0.3, 0x000000)
+      let piece2 = this.add.rectangle(this.w*0.13,this.h*0.5,this.w*0.2, this.h*0.3, 0x000000)
         .setInteractive()
           .on('pointerdown', () => {
             currentPiece = 2;
             this.checkPage(currentPiece, currentPage)
-            console.log("placing page");
-            this.highlightPuzzle(piece1, piece2, 0xff0000);
+            // console.log("placing page");
+            this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
           });
-      // let piece3 = this.add.rectangle(this.w*0.42,this.h*0.2,this.w*0.2, this.h*0.3, 0xff0000);
-      // let piece4 = this.add.rectangle(this.w*0.42,this.h*0.52,this.w*0.2, this.h*0.3, 0xff0000);
-      // let piece5 = this.add.rectangle(this.w*0.64,this.h*0.2,this.w*0.2, this.h*0.3, 0xff0000);
-      // let piece6 = this.add.rectangle(this.w*0.64,this.h*0.52,this.w*0.2, this.h*0.3, 0xff0000);
-
-      let page1 = this.add.rectangle(this.w*0.1,this.h*0.85,this.w*0.15, this.h*0.25, 0xffff00)
+      let piece3 = this.add.rectangle(this.w*0.35,this.h*0.18,this.w*0.2, this.h*0.3, 0x000000)
         .setInteractive()
         .on('pointerdown', () => {
-            this.highlightPuzzle(piece1, piece2, 0x45fffc);
+          currentPiece = 3;
+          this.checkPage(currentPiece, currentPage)
+          // console.log("placing page");
+          this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
+        });
+      let piece4 = this.add.rectangle(this.w*0.35,this.h*0.5,this.w*0.2, this.h*0.3, 0x000000)
+        .setInteractive()
+        .on('pointerdown', () => {
+          currentPiece = 4;
+          this.checkPage(currentPiece, currentPage)
+          // console.log("placing page");
+          this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
+        });
+      let piece5 = this.add.rectangle(this.w*0.13,this.h*0.82,this.w*0.2, this.h*0.3, 0x000000)
+        .setInteractive()
+        .on('pointerdown', () => {
+          currentPiece = 5;
+          this.checkPage(currentPiece, currentPage)
+          // console.log("placing page");
+          this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
+        });
+      let piece6 = this.add.rectangle(this.w*0.35,this.h*0.82,this.w*0.2, this.h*0.3, 0x000000)
+        .setInteractive()
+        .on('pointerdown', () => {
+          currentPiece = 6;
+          this.checkPage(currentPiece, currentPage)
+          // console.log("placing page");
+          this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
+        });
+
+      let page1 = this.add.image(this.w*0.57,this.h*0.18, 'page1')
+        .setInteractive()
+        .on('pointerdown', () => {
+            this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
             currentPage = page1;
             console.log("select the right tile");
         });
 
-      let page2 = this.add.rectangle(this.w*0.4,this.h*0.85,this.w*0.15, this.h*0.25, 0xffff00)
+      let page2 = this.add.image(this.w*0.57,this.h*0.5, 'page2')
         .setInteractive()
         .on('pointerdown', () => {
-            this.highlightPuzzle(piece1, piece2, 0x45fffc);
-            currentPage = page2;
+          this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
+          currentPage = page2;
             console.log("select the right tile");
         });
 
-      // let next = this.add.rectangle(this.w*0.9,this.h*0.5,this.w*0.1, this.h*0.1, 0xffffff)
-      //   .setInteractive()
-      //   .on('pointerdown', () => {
-      //     this.scene.start("LibraryLock");
-      //   });
+      let page3 = this.add.image(this.w*0.75,this.h*0.18, 'page3')
+        .setInteractive()
+        .on('pointerdown', () => {
+          this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
+          currentPage = page3;
+            console.log("select the right tile");
+        });
 
-      // let nextText = this.add.text(this.w*0.87, this.h*0.48, "Next", { fill: '#0ff000' }).setFontSize(50);
-    
+      let page4 = this.add.image(this.w*0.75,this.h*0.5, 'page4')
+        .setInteractive()
+        .on('pointerdown', () => {
+          this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
+          currentPage = page4;
+            console.log("select the right tile");
+        });
+
+      let page5 = this.add.image(this.w*0.57,this.h*0.82, 'page5')
+        .setInteractive()
+        .on('pointerdown', () => {
+          this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
+          currentPage = page5;
+            console.log("select the right tile");
+        });
+
+      let page6 = this.add.image(this.w*0.75,this.h*0.82, 'page6')
+        .setInteractive()
+        .on('pointerdown', () => {
+          this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
+          currentPage = page6;
+            console.log("select the right tile");
+        });
+
+      let next = this.add.rectangle(this.w*0.9,this.h*0.5,this.w*0.1, this.h*0.1, 0xffffff)
+        .setInteractive()
+        .on('pointerdown', () => {
+          this.scene.start("LibraryLock");
+        });
+
+      let nextText = this.add.text(this.w*0.87, this.h*0.48, "Next", { fill: '#0ff000' }).setFontSize(50);
+      
+      let restart = this.add.rectangle(this.w*0.9,this.h*0.06,this.w*0.1, this.h*0.1, 0xffffff)
+        .setInteractive()
+        .on('pointerdown', () => {
+          this.scene.restart();
+        });
+    let restartText = this.add.text(this.w*0.85, this.h*0.04, "Restart?", { fill: '#0ff000' }).setFontSize(40);
   } 
   update() {    }
 
-  highlightPuzzle(piece1, piece2, color) {
+  highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, color) {
     piece1.setStrokeStyle(5, color);
     piece2.setStrokeStyle(5, color);
-
+    piece3.setStrokeStyle(5, color);
+    piece4.setStrokeStyle(5, color);
+    piece5.setStrokeStyle(5, color);
+    piece6.setStrokeStyle(5, color);
   }
 
   checkPage(piece, page) {
     if (piece == 1) {
-      page.x = this.w*0.2;
-      page.y = this.h*0.2;
+      page.x = this.w*0.13;
+      page.y = this.h*0.18;
     }
     else if (piece == 2) {
-      page.x = this.w*0.2;
-      page.y = this.h*0.52;
+      page.x = this.w*0.13;
+      page.y = this.h*0.5;
+    }
+    else if (piece == 3) {
+      page.x = this.w*0.35;
+      page.y = this.h*0.18;
+    }
+    else if (piece == 4) {
+      page.x = this.w*0.35;
+      page.y = this.h*0.5;
+    }
+    else if (piece == 5) {
+      page.x = this.w*0.13;
+      page.y = this.h*0.82;
+    }
+    else if (piece == 6) {
+      page.x = this.w*0.35;
+      page.y = this.h*0.82;
     }
   }
 }
@@ -108,21 +198,24 @@ class LibraryLock extends Phaser.Scene {
         .setInteractive()
         .on('pointerdown', () => {
           if (this.checkAnswers()) {
+            this.current = 1;
             this.scene.start("LibraryPagePuzzle");
           }
           else {
+            this.current = 1;
             this.scene.restart();
           }
         });
 
       let nextText = this.add.text(this.w*0.87, this.h*0.48, "Next", { fill: '#0ff000' }).setFontSize(50);
 
-      // let restart = this.add.rectangle(this.w*0.9,this.h*0.06,this.w*0.1, this.h*0.1, 0xffffff)
-      //   .setInteractive()
-      //   .on('pointerdown', () => {
-      //     this.scene.restart();
-      //   });
-      // let restartText = this.add.text(this.w*0.85, this.h*0.04, "Restart?", { fill: '#0ff000' }).setFontSize(40);
+      let restart = this.add.rectangle(this.w*0.9,this.h*0.06,this.w*0.1, this.h*0.1, 0xffffff)
+        .setInteractive()
+        .on('pointerdown', () => {
+          this.current = 1;
+          this.scene.restart();
+        });
+      let restartText = this.add.text(this.w*0.85, this.h*0.04, "Restart?", { fill: '#0ff000' }).setFontSize(40);
       
       this.correctAnswers[0] = adj1.text;
       this.correctAnswers[1] = adj2.text;
