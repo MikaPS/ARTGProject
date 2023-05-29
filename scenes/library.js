@@ -23,9 +23,8 @@ class LibraryHelpDesk extends Phaser.Scene {
         this.help3 = this.add.text(this.w*0.1, this.h*0.73, "If you are determined enough,\nfind the locked books section.").setFontSize(60).setAlpha(0);
         this.help4 = this.add.text(this.w*0.1, this.h*0.73, "Find the red and blue book.").setFontSize(60).setAlpha(0);
         this.help5 = this.add.text(this.w*0.1, this.h*0.73, "Find the green and gold book.").setFontSize(60).setAlpha(0);
-    
-  
-    }
+  }
+
   update() {
     this.changeText();
   }

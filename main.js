@@ -17,7 +17,7 @@ let config = {
             }
         }
     },
-    scene: [LibraryHelpDesk, LibraryPagePuzzle, LibraryLock]
+    scene: [SmartWeapon]
 };
 
 let game = new Phaser.Game(config);
