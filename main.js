@@ -17,7 +17,7 @@ let config = {
             }
         }
     },
-    scene: [SmartWeapon]
+    scene: [Fight, Win, Lose]
 };
 
 let game = new Phaser.Game(config);
