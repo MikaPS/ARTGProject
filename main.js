@@ -17,8 +17,8 @@ let config = {
             }
         }
     },
-    // scene: [LibraryInside, LibraryHelpDesk, LibraryLock, LibraryPagePuzzle]
-    scene: [Fight, Win, Lose]
+    scene: [LibraryInside, LibraryHelpDesk, LibraryLock, LibraryPagePuzzle]
+    // scene: [Fight, Win, Lose]
 };
 
 let game = new Phaser.Game(config);
