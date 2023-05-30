@@ -23,7 +23,7 @@ let config = {
     // scene: [LibraryPagePuzzle]
     // scene: [Fight, Win, Lose]
     // scene: [Armory, SmartWeapon, QuickWeapon]
-    scene: [Map, Armory, Library, LibraryHelpDesk, LibraryLockedDoor, LibraryLock, LibraryPagePuzzle, QuickWeapon, SmartWeapon]
+    scene: [Map, Armory, Library, LibraryHelpDesk, LibraryLockedDoor, LibraryLock, LibraryBooks, LibraryPagePuzzle, QuickWeapon, SmartWeapon]
 };
 
 let game = new Phaser.Game(config);

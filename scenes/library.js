@@ -365,7 +365,7 @@ class LibraryLock extends Phaser.Scene {
           if (this.checkAnswers()) {
             this.current = 1;
             this.shelves.destroy();
-            this.scene.start("LibraryPagePuzzle");
+            this.scene.start("LibraryBooks");
           }
           else {
             this.current = 1;
