@@ -30,22 +30,22 @@ class Fight extends Phaser.Scene {
         this.turn1instructions = this.add.text(this.w*0.2, this.h*0.12, "Click the button below the rock to stop it!").setFontSize(40).setAlpha(0);
 
         let blue = this.add.rectangle(this.w*0.2,this.h*0.9,this.w*0.15, this.w*0.1, 0x1f53a6)
-            .setInteractive()
+            .setInteractive({useHandCursor: true})
             .on('pointerdown', () => {
                 this.playerActions(1);
             });
         let lightblue = this.add.rectangle(this.w*0.4,this.h*0.9,this.w*0.15, this.w*0.1, 0x75a8fa)
-            .setInteractive()
+            .setInteractive({useHandCursor: true})
             .on('pointerdown', () => {
                 this.playerActions(2);
             });
         let gold = this.add.rectangle(this.w*0.6,this.h*0.9,this.w*0.15, this.w*0.1, 0xD4AF37)
-            .setInteractive()
+            .setInteractive({useHandCursor: true})
             .on('pointerdown', () => {
                 this.playerActions(3);
             });
         let lightgold = this.add.rectangle(this.w*0.8,this.h*0.9,this.w*0.15, this.w*0.1, 0xFFDF00)
-            .setInteractive()
+            .setInteractive({useHandCursor: true})
             .on('pointerdown', () => {
                 this.playerActions(4);
             });

@@ -11,16 +11,16 @@ class LibraryInside extends Phaser.Scene {
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
     let bg = this.add.image(this.w*0.3,this.h*0.5, 'background').setScale(1.05).setDepth(1);
-    this.add.text(this.w*0.6, this.h*0.1, "The library of Atlantis,one of\nthe most treasured places in\nthe universe.\n\nIt has the know-all blue orb,\nthat can help you find what you\nare looking for.\n\nDespite the many books on\ndisplay,some materials are\nhidden from regular reach.\nCheck tne water wall.").setFontSize(40);
+    this.add.text(this.w*0.6, this.h*0.1, "The library of Atlantis,one of\nthe most treasured places in\nthe universe.\n\nIt has the know-all blue orb,\nthat can help you find what you\nare looking for.\n\nDespite the many books on\ndisplay,some materials are\nhidden from regular reach.\nCheck the water wall.").setFontSize(40);
 
     this.add.rectangle(this.w*0.355, this.h*0.68, this.w*0.05, this.h*0.1, 0xff0000)
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.scene.start("LibraryHelpDesk");
         });
 
       this.add.rectangle(this.w*0.3, this.h*0.4, this.w*0.06, this.h*0.5, 0xff0000)
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.scene.start("LibraryLockedDoor");
         });
@@ -45,7 +45,7 @@ class LibraryHelpDesk extends Phaser.Scene {
     let bg = this.add.image(this.w*0.5,this.h*0.1, 'background').setScale(2).setDepth(-1);
 
     this.add.rectangle(this.w*0.5, this.h*0.75, this.w*0.9, this.h*0.35, 0x0000ff).setAlpha(0.65)
-      .setInteractive()
+      .setInteractive({useHandCursor: true})
       .on('pointerdown', () => {
         this.click += 1;
       });
@@ -70,12 +70,12 @@ class LibraryHelpDesk extends Phaser.Scene {
   changeText() {
     if (this.click == 1) {
       this.help1.destroy();
-      this.answer1.setAlpha(1).setInteractive()
+      this.answer1.setAlpha(1).setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.route = 1;
           this.click = 2;
         });
-      this.answer2.setAlpha(1).setInteractive()
+      this.answer2.setAlpha(1).setInteractive({useHandCursor: true})
       .on('pointerdown', () => {
         this.route = 2;
         this.click = 2;
@@ -131,7 +131,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
       let currentPage = 0;
       let currentPiece = 0;
       let piece1 = this.add.rectangle(this.w*0.13,this.h*0.18,this.w*0.2, this.h*0.3, 0x000000)
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           currentPiece = 1;
           this.checkPage(currentPiece, currentPage)
@@ -139,7 +139,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
         });
       let piece2 = this.add.rectangle(this.w*0.13,this.h*0.5,this.w*0.2, this.h*0.3, 0x000000)
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
           .on('pointerdown', () => {
             currentPiece = 2;
             this.checkPage(currentPiece, currentPage)
@@ -147,7 +147,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
             this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
           });
       let piece3 = this.add.rectangle(this.w*0.35,this.h*0.18,this.w*0.2, this.h*0.3, 0x000000)
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           currentPiece = 3;
           this.checkPage(currentPiece, currentPage)
@@ -155,7 +155,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
         });
       let piece4 = this.add.rectangle(this.w*0.35,this.h*0.5,this.w*0.2, this.h*0.3, 0x000000)
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           currentPiece = 4;
           this.checkPage(currentPiece, currentPage)
@@ -163,7 +163,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
         });
       let piece5 = this.add.rectangle(this.w*0.57,this.h*0.18,this.w*0.2, this.h*0.3, 0x000000)
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           currentPiece = 5;
           this.checkPage(currentPiece, currentPage)
@@ -171,7 +171,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
         });
       let piece6 = this.add.rectangle(this.w*0.57,this.h*0.5,this.w*0.2, this.h*0.3, 0x000000)
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           currentPiece = 6;
           this.checkPage(currentPiece, currentPage)
@@ -180,7 +180,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
         });
 
       let page1 = this.add.image(this.w*0.1,this.h*0.72, 'page1')
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
             this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
             currentPage = page1;
@@ -188,7 +188,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
         });
 
       let page2 = this.add.image(this.w*0.2,this.h*0.72, 'page2')
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
           currentPage = page2;
@@ -196,7 +196,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
         });
 
       let page3 = this.add.image(this.w*0.3,this.h*0.72, 'page3')
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
           currentPage = page3;
@@ -204,7 +204,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
         });
 
       let page4 = this.add.image(this.w*0.4,this.h*0.72, 'page4')
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
           currentPage = page4;
@@ -212,7 +212,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
         });
 
       let page5 = this.add.image(this.w*0.5,this.h*0.72, 'page5')
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
           currentPage = page5;
@@ -220,7 +220,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
         });
 
       let page6 = this.add.image(this.w*0.6,this.h*0.72, 'page6')
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
           currentPage = page6;
@@ -228,7 +228,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
         });
 
       let next = this.add.rectangle(this.w*0.9,this.h*0.5,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.scene.start("LibraryInside");
         });
@@ -236,7 +236,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
       let nextText = this.add.text(this.w*0.87, this.h*0.48, "Next", { fill: '#ffffff' }).setFontSize(50);
       
       let restart = this.add.rectangle(this.w*0.9,this.h*0.06,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.scene.restart();
         });
@@ -293,11 +293,11 @@ class LibraryLockedDoor extends Phaser.Scene {
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
     let door = this.add.image(this.w*0.3,this.h*0.5, "door")
-      .setInteractive()
+      .setInteractive({useHandCursor: true})
       .on('pointerdown', () => {
           this.scene.start("LibraryLock")
         });
-    this.add.text(this.w*0.6, this.h*0.1, "You found the hidden chamber of the library.\nOnly true scholars were able to reach it.\n\nClick the door to move inside.").setFontSize(40);
+    this.add.text(this.w*0.6, this.h*0.1, "You found the hidden chamber of\nthe library. Only true scholars\nwere able to reach it.\n\nClick the door to move inside.").setFontSize(40);
   }
 }
 
@@ -336,7 +336,7 @@ class LibraryLock extends Phaser.Scene {
       let adj8 = this.add.text(this.w*0.4,this.h*0.6, "Cool").setFontSize(40); this.adjAttribute(adj8);
 
       let next = this.add.rectangle(this.w*0.9,this.h*0.5,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           if (this.checkAnswers()) {
             this.current = 1;
@@ -351,7 +351,7 @@ class LibraryLock extends Phaser.Scene {
       let nextText = this.add.text(this.w*0.855, this.h*0.48, "Unlock", { fill: '#ffffff' }).setFontSize(50);
 
       let restart = this.add.rectangle(this.w*0.9,this.h*0.06,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
-        .setInteractive()
+        .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.current = 1;
           this.scene.restart();
@@ -368,7 +368,7 @@ class LibraryLock extends Phaser.Scene {
   update() {    }
 
   adjAttribute(adj) {
-    adj.setInteractive()
+    adj.setInteractive({useHandCursor: true})
       .on('pointerdown', () => {
         this.nextFreeSpace(adj);
       });
@@ -434,7 +434,7 @@ class LibraryBooks extends Phaser.Scene {
     this.add.rectangle(this.w*0.49, this.h*0.85, this.w*0.9, this.h*0.2, 0x159685).setAlpha(0.75);
     this.help1 = this.add.text(this.w*0.05, this.h*0.8, "Remeber the book the librarian told you to find.\nThe turquoise one.").setFontSize(48);
 
-    this.add.rectangle(this.w*0.89, this.h*0.47, this.w*0.06, this.h*0.3, 0xffffff).setInteractive().setDepth(-1)
+    this.add.rectangle(this.w*0.89, this.h*0.47, this.w*0.06, this.h*0.3, 0xffffff).setInteractive({useHandCursor: true}).setDepth(-1)
       .on('pointerdown', () => {
       this.scene.start("LibraryPagePuzzle");
     });
