@@ -20,6 +20,7 @@ let config = {
         }
     },
     // scene: [Library, LibraryHelpDesk, LibraryLockedDoor,LibraryLock, LibraryPagePuzzle]
+    // scene: [LibraryPagePuzzle]
     // scene: [Fight, Win, Lose]
     // scene: [Armory, SmartWeapon, QuickWeapon]
     scene: [Map, Armory, Library, LibraryHelpDesk, LibraryLockedDoor, LibraryLock, LibraryPagePuzzle, QuickWeapon, SmartWeapon]

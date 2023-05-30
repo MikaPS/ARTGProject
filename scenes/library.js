@@ -123,12 +123,13 @@ class LibraryPagePuzzle extends Phaser.Scene {
   }
  
   preload() {
-      this.load.image('page1', './assets/library/rock.png');
-      this.load.image('page2', './assets/library/rock.png');
-      this.load.image('page3', './assets/library/rock.png');
-      this.load.image('page4', './assets/library/rock.png');
-      this.load.image('page5', './assets/library/rock.png');
-      this.load.image('page6', './assets/library/rock.png');
+      this.load.image('page1', './assets/library/fight1.jpeg');
+      this.load.image('page2', './assets/library/fight2.jpeg');
+      this.load.image('page3', './assets/library/fight3.jpeg');
+      this.load.image('page4', './assets/library/fight4.jpeg');
+      this.load.image('page5', './assets/library/fight5.jpeg');
+      this.load.image('page6', './assets/library/fight6.jpeg');
+      this.load.image('correct', './assets/library/fightbook.jpg');
       this.load.image('bookshelves', './assets/library/bookshelf_and_books.png');
 
 
@@ -140,7 +141,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
       this.shelves = this.add.image(this.w*0.5, this.h*0.7, "bookshelves").setScale(1.85).setAlpha(0.6);
       this.add.rectangle(this.w*0.49, this.h*0.89, this.w*0.9, this.h*0.2, 0xf57542).setAlpha(0.65);
       this.help1 = this.add.text(this.w*0.05, this.h*0.82, "Oh no! The page is torn and not readable.\nMatch the pieces of the pages on the bottom side of the\nscreen in their correct locations on the upper side.\nClicking on a page will highlight where it can be placed.").setFontSize(48);
-
+      this.correct = this.add.image(this.w*0.35, this.h*0.3, "correct").setDepth(2).setScale(0.45).setAlpha(0);
       let currentPage = 0;
       let currentPiece = 0;
       let piece1 = this.add.rectangle(this.w*0.13,this.h*0.18,this.w*0.2, this.h*0.3, 0x000000)
@@ -192,7 +193,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
         });
 
-      let page1 = this.add.image(this.w*0.1,this.h*0.72, 'page1')
+      let page1 = this.add.image(this.w*0.75,this.h*0.14, 'page1').setScale(0.25)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
             this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
@@ -200,7 +201,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
             console.log("select the right tile");
         });
 
-      let page2 = this.add.image(this.w*0.2,this.h*0.72, 'page2')
+      let page2 = this.add.image(this.w*0.75,this.h*0.38, 'page2').setScale(0.25)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
@@ -208,7 +209,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
             console.log("select the right tile");
         });
 
-      let page3 = this.add.image(this.w*0.3,this.h*0.72, 'page3')
+      let page3 = this.add.image(this.w*0.75,this.h*0.62, 'page3').setScale(0.25)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
@@ -216,7 +217,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
             console.log("select the right tile");
         });
 
-      let page4 = this.add.image(this.w*0.4,this.h*0.72, 'page4')
+      let page4 = this.add.image(this.w*0.90,this.h*0.13, 'page4').setScale(0.25)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
@@ -224,7 +225,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
             console.log("select the right tile");
         });
 
-      let page5 = this.add.image(this.w*0.5,this.h*0.72, 'page5')
+      let page5 = this.add.image(this.w*0.9,this.h*0.39, 'page5').setScale(0.25)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
@@ -232,7 +233,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
             console.log("select the right tile");
         });
 
-      let page6 = this.add.image(this.w*0.6,this.h*0.72, 'page6')
+      let page6 = this.add.image(this.w*0.9,this.h*0.65, 'page6').setScale(0.25)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
@@ -240,22 +241,29 @@ class LibraryPagePuzzle extends Phaser.Scene {
             console.log("select the right tile");
         });
 
-      let next = this.add.rectangle(this.w*0.9,this.h*0.5,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
+        this.click = 1;
+      let next = this.add.rectangle(this.w*0.1,this.h*0.72,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
+          console.log(this.click);
+          if (this.click == 1) {
+            this.correct.setAlpha(1);
+            this.click = 2;
+          } else if (this.click==2) {
           this.shelves.destroy();
           this.scene.start("Library");
+          }
         });
 
-      let nextText = this.add.text(this.w*0.87, this.h*0.48, "Next", { fill: '#ffffff' }).setFontSize(50);
+      let nextText = this.add.text(this.w*0.07, this.h*0.7, "Next", { fill: '#ffffff' }).setFontSize(50);
       
-      let restart = this.add.rectangle(this.w*0.9,this.h*0.06,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
+      let restart = this.add.rectangle(this.w*0.25,this.h*0.72,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.shelves.destroy();
           this.scene.restart();
         });
-    let restartText = this.add.text(this.w*0.85, this.h*0.04, "Restart?", { fill: '#ffffff' }).setFontSize(40);
+    let restartText = this.add.text(this.w*0.2, this.h*0.7, "Restart?", { fill: '#ffffff' }).setFontSize(40);
   } 
   update() {    }
 
