@@ -19,10 +19,10 @@ let config = {
             }
         }
     },
-    // scene: [LibraryInside, LibraryHelpDesk, LibraryLockedDoor,LibraryLock, LibraryPagePuzzle]
+    // scene: [Library, LibraryHelpDesk, LibraryLockedDoor,LibraryLock, LibraryPagePuzzle]
     // scene: [Fight, Win, Lose]
-    // scene: [SmartWeapon]
-    scene: [ArmoryInside, SmartWeapon, QuickWeapon]
+    // scene: [Armory, SmartWeapon, QuickWeapon]
+    scene: [Map, Armory, Library, LibraryHelpDesk, LibraryLockedDoor, LibraryLock, LibraryPagePuzzle, QuickWeapon, SmartWeapon]
 };
 
 let game = new Phaser.Game(config);

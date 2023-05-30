@@ -1,16 +1,16 @@
-class ArmoryInside extends Phaser.Scene {
+class Armory extends Phaser.Scene {
     constructor() {
-        super('ArmoryInside');
+        super('Armory');
       }
   
       preload() {
-        this.load.image('background', './assets/armory/Armory.png');  
+        this.load.image('bg', './assets/armory/Armory.png');  
       }
 
       create() {
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
-        this.add.image(this.w*0.3, this.h*0.5, "background").setDepth(1);
+        this.bg = this.add.image(this.w*0.3, this.h*0.5, "bg").setDepth(1);
         this.add.text(this.w*0.6, this.h*0.1, "The famous armory,\nholding the strongest weapons.\n\nYou can get the one that is\ncurrently in the flame oven.\n\nOr the big sword at the top\nof the wall.\n\nBe careful, the swords\nwould only let worth ones\nhold them.").setFontSize(40);
         this.add.rectangle(this.w*0.28, this.h*0.6, this.w*0.1, this.h*0.1, 0xff0000)
             .setInteractive({useHandCursor: true})
@@ -23,6 +23,15 @@ class ArmoryInside extends Phaser.Scene {
             .on('pointerdown', () => {
             this.scene.start("SmartWeapon");
         });
+
+        let restart = this.add.rectangle(this.w*0.91,this.h*0.92,this.w*0.15, this.h*0.1, 0xf57542).setAlpha(0.65)
+        .setInteractive({useHandCursor: true})
+        .on('pointerdown', () => {
+            this.bg.setAlpha(0);
+            this.scene.start("Map");
+        });
+        let restartText = this.add.text(this.w*0.89, this.h*0.9, "Map", { fill: '#ffffff' }).setFontSize(40);
+      
     
     }
 }
@@ -35,13 +44,13 @@ class SmartWeapon extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background', './assets/armory/Armory.png');  
+        this.load.image('bg', './assets/armory/Armory.png');  
     }
 
     create() {
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
-        this.add.image(this.w*0.6, this.h, "background").setScale(2.2).setAlpha(0.8);
+        this.add.image(this.w*0.6, this.h, "bg").setScale(2.2).setAlpha(0.8);
 
         this.add.rectangle(this.w*0.49, this.h*0.8, this.w*0.9, this.h*0.3, 0xf57542).setAlpha(0.75)
         .setInteractive({useHandCursor: true})
@@ -131,7 +140,7 @@ class SmartWeapon extends Phaser.Scene {
             this.click = 7;
         } 
         if (this.click == 7) {
-            this.scene.start("ArmoryInside");
+            this.scene.start("Armory");
         }
     }
 
@@ -145,14 +154,14 @@ class QuickWeapon extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background', './assets/armory/Armory.png');  
+        this.load.image('bg', './assets/armory/Armory.png');  
         this.load.image('quickweapon', './assets/armory/quickweapon.png');  
 
     }
     create() {
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
-        this.add.image(this.w*0.5, this.h*0.5, "background").setScale(1.7).setAlpha(0.5);
+        this.add.image(this.w*0.5, this.h*0.5, "bg").setScale(1.7).setAlpha(0.5);
 
         this.target = this.add.image(this.w*0.5, this.h*0.5, "quickweapon")
         .setInteractive({useHandCursor: true})
@@ -198,7 +207,7 @@ class QuickWeapon extends Phaser.Scene {
         }
         this.time.addEvent({
             delay: 3000, // 1 second
-            callback: () => this.scene.start("ArmoryInside"),
+            callback: () => this.scene.start("Armory"),
         });
     }
 

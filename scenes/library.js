@@ -1,6 +1,7 @@
-class LibraryInside extends Phaser.Scene {
+
+class Library extends Phaser.Scene {
   constructor() {
-    super('LibraryInside');
+    super('Library');
   }
 
   preload() {
@@ -10,20 +11,31 @@ class LibraryInside extends Phaser.Scene {
   create() {
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
-    let bg = this.add.image(this.w*0.3,this.h*0.5, 'background').setScale(1.05).setDepth(1);
+    this.bg = this.add.image(this.w*0.3,this.h*0.5, 'background').setScale(1.05).setDepth(1);
     this.add.text(this.w*0.6, this.h*0.1, "The library of Atlantis,one of\nthe most treasured places in\nthe universe.\n\nIt has the know-all blue orb,\nthat can help you find what you\nare looking for.\n\nDespite the many books on\ndisplay,some materials are\nhidden from regular reach.\nCheck the water wall.").setFontSize(40);
 
     this.add.rectangle(this.w*0.355, this.h*0.68, this.w*0.05, this.h*0.1, 0xff0000)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
+          this.bg.destroy();
           this.scene.start("LibraryHelpDesk");
         });
 
       this.add.rectangle(this.w*0.3, this.h*0.4, this.w*0.06, this.h*0.5, 0xff0000)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
+          this.bg.destroy();
           this.scene.start("LibraryLockedDoor");
         });
+
+        let restart = this.add.rectangle(this.w*0.91,this.h*0.92,this.w*0.15, this.h*0.1, 0xf57542).setAlpha(0.65)
+        .setInteractive({useHandCursor: true})
+        .on('pointerdown', () => {
+          this.bg.destroy();
+          this.scene.start("Map");
+        });
+        let restartText = this.add.text(this.w*0.89, this.h*0.9, "Map", { fill: '#ffffff' }).setFontSize(40);
+      
   }
 }
 
@@ -50,7 +62,7 @@ class LibraryHelpDesk extends Phaser.Scene {
         this.click += 1;
       });
       
-    this.add.rectangle(this.w*0.43, this.h*0.14, this.w*0.8, this.h*0.15, 0x000000).setAlpha(0.65);
+    this.bg = this.add.rectangle(this.w*0.43, this.h*0.14, this.w*0.8, this.h*0.15, 0x000000).setAlpha(0.65);
     this.add.text(this.w*0.05, this.h*0.1, "* Click on the blue rectangle to move on...\nWhen you are given an option, click on the text that fits you\n").setFontSize(40);
 
 
@@ -98,7 +110,8 @@ class LibraryHelpDesk extends Phaser.Scene {
         this.help5.setAlpha(1);
       }
     } else if (this.click ==5) {
-      this.scene.start("LibraryInside");
+      this.bg.destroy();
+      this.scene.start("Library");
     }
   }
 }
@@ -124,7 +137,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
   create() {
       this.w = this.cameras.main.width;
       this.h = this.cameras.main.height;
-      this.add.image(this.w*0.5, this.h*0.7, "bookshelves").setScale(1.85).setAlpha(0.6);
+      this.shelves = this.add.image(this.w*0.5, this.h*0.7, "bookshelves").setScale(1.85).setAlpha(0.6);
       this.add.rectangle(this.w*0.49, this.h*0.89, this.w*0.9, this.h*0.2, 0xf57542).setAlpha(0.65);
       this.help1 = this.add.text(this.w*0.05, this.h*0.82, "Oh no! The page is torn and not readable.\nMatch the pieces of the pages on the bottom side of the\nscreen in their correct locations on the upper side.\nClicking on a page will highlight where it can be placed.").setFontSize(48);
 
@@ -230,7 +243,8 @@ class LibraryPagePuzzle extends Phaser.Scene {
       let next = this.add.rectangle(this.w*0.9,this.h*0.5,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
-          this.scene.start("LibraryInside");
+          this.shelves.destroy();
+          this.scene.start("Library");
         });
 
       let nextText = this.add.text(this.w*0.87, this.h*0.48, "Next", { fill: '#ffffff' }).setFontSize(50);
@@ -238,6 +252,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
       let restart = this.add.rectangle(this.w*0.9,this.h*0.06,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
+          this.shelves.destroy();
           this.scene.restart();
         });
     let restartText = this.add.text(this.w*0.85, this.h*0.04, "Restart?", { fill: '#ffffff' }).setFontSize(40);
@@ -292,9 +307,10 @@ class LibraryLockedDoor extends Phaser.Scene {
     this.cameras.main.setBackgroundColor('#001133');
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
-    let door = this.add.image(this.w*0.3,this.h*0.5, "door")
+    this.door = this.add.image(this.w*0.3,this.h*0.5, "door")
       .setInteractive({useHandCursor: true})
       .on('pointerdown', () => {
+        this.door.destroy();
           this.scene.start("LibraryLock")
         });
     this.add.text(this.w*0.6, this.h*0.1, "You found the hidden chamber of\nthe library. Only true scholars\nwere able to reach it.\n\nClick the door to move inside.").setFontSize(40);
@@ -319,7 +335,7 @@ class LibraryLock extends Phaser.Scene {
       this.w = this.cameras.main.width;
       this.h = this.cameras.main.height;
       let lock = this.add.image(this.w*0.12,this.h*0.22, "lock").setScale(1.2);
-      let shelves = this.add.image(this.w*0.5,this.h*0.2, "bookshelves").setAlpha(0.35).setScale(2).setDepth(-1);
+      this.shelves = this.add.image(this.w*0.5,this.h*0.2, "bookshelves").setAlpha(0.35).setScale(2).setDepth(-1);
 
       this.add.rectangle(this.w*0.49, this.h*0.85, this.w*0.9, this.h*0.2, 0xf57542).setAlpha(0.65);
       this.help1 = this.add.text(this.w*0.05, this.h*0.77, "You will need to create a key that fits the lock...\nIn four words, how would you describe the lock?\nClick on the words shown above and then 'unlock'\n* Can restart if clicked the wrong words").setFontSize(48);
@@ -340,6 +356,7 @@ class LibraryLock extends Phaser.Scene {
         .on('pointerdown', () => {
           if (this.checkAnswers()) {
             this.current = 1;
+            this.shelves.destroy();
             this.scene.start("LibraryPagePuzzle");
           }
           else {
@@ -429,13 +446,14 @@ class LibraryBooks extends Phaser.Scene {
   create() {
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
-    this.add.image(this.w*0.5, this.h*0.7, "bookshelves").setScale(1.85);
+    this.shelves = this.add.image(this.w*0.5, this.h*0.7, "bookshelves").setScale(1.85);
 
     this.add.rectangle(this.w*0.49, this.h*0.85, this.w*0.9, this.h*0.2, 0x159685).setAlpha(0.75);
     this.help1 = this.add.text(this.w*0.05, this.h*0.8, "Remeber the book the librarian told you to find.\nThe turquoise one.").setFontSize(48);
 
     this.add.rectangle(this.w*0.89, this.h*0.47, this.w*0.06, this.h*0.3, 0xffffff).setInteractive({useHandCursor: true}).setDepth(-1)
       .on('pointerdown', () => {
+        this.shelves.destroy();
       this.scene.start("LibraryPagePuzzle");
     });
   }
