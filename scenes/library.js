@@ -43,6 +43,7 @@ class LibraryHelpDesk extends Phaser.Scene {
       .on('pointerdown', () => {
         this.click += 1;
       });
+      
     this.add.rectangle(this.w*0.43, this.h*0.14, this.w*0.8, this.h*0.15, 0x000000).setAlpha(0.65);
     this.add.text(this.w*0.05, this.h*0.1, "* Click on the blue rectangle to move on...\nWhen you are given an option, click on the text that fits you\n").setFontSize(40);
 
@@ -277,23 +278,36 @@ class LibraryLock extends Phaser.Scene {
   }
  
   preload() {
+    this.load.image('lock', './assets/library/lock.png');
+    this.load.image('bookshelves', './assets/library/bookshelf_and_books.png');
   }
 
   create() {
     this.cameras.main.setBackgroundColor('#001133');
       this.w = this.cameras.main.width;
       this.h = this.cameras.main.height;
-      let lock = this.add.rectangle(this.w*0.2,this.h*0.2,this.w*0.2, this.h*0.3, 0xff0000);
+      let lock = this.add.image(this.w*0.12,this.h*0.22, "lock").setScale(1.2);
+      let shelves = this.add.image(this.w*0.5,this.h*0.2, "bookshelves").setAlpha(0.35).setScale(2).setDepth(-1);
+
+      this.add.rectangle(this.w*0.49, this.h*0.85, this.w*0.9, this.h*0.2, 0xf57542).setAlpha(0.65)
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.click += 1;
+      });
+      this.help1 = this.add.text(this.w*0.05, this.h*0.77, "You will need to create a key that fits the lock...\nIn four words, how would you describe the lock?\nClick on the words shown above and then 'unlock'\n* Can restart if clicked the wrong words").setFontSize(48);
+
 
       this.add.text(this.w*0.35, this.h*0.05, "Your Selection: ").setFontSize(60);
       let adj1 = this.add.text(this.w*0.1,this.h*0.5, "Rusty").setFontSize(40); this.adjAttribute(adj1);
       let adj2 = this.add.text(this.w*0.2,this.h*0.5, "New").setFontSize(40); this.adjAttribute(adj2);
       let adj3 = this.add.text(this.w*0.3,this.h*0.5, "Gold").setFontSize(40); this.adjAttribute(adj3);
-      let adj4 = this.add.text(this.w*0.4,this.h*0.5, "Green").setFontSize(40); this.adjAttribute(adj4);
+      let adj4 = this.add.text(this.w*0.4,this.h*0.5, "Orange").setFontSize(40); this.adjAttribute(adj4);
       let adj5 = this.add.text(this.w*0.1,this.h*0.6, "Small").setFontSize(40); this.adjAttribute(adj5);
       let adj6 = this.add.text(this.w*0.2,this.h*0.6, "Big").setFontSize(40); this.adjAttribute(adj6);
+      let adj7 = this.add.text(this.w*0.3,this.h*0.6, "Warm").setFontSize(40); this.adjAttribute(adj7);
+      let adj8 = this.add.text(this.w*0.4,this.h*0.6, "Cool").setFontSize(40); this.adjAttribute(adj8);
 
-      let next = this.add.rectangle(this.w*0.9,this.h*0.5,this.w*0.1, this.h*0.1, 0xffffff)
+      let next = this.add.rectangle(this.w*0.9,this.h*0.5,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive()
         .on('pointerdown', () => {
           if (this.checkAnswers()) {
@@ -306,20 +320,20 @@ class LibraryLock extends Phaser.Scene {
           }
         });
 
-      let nextText = this.add.text(this.w*0.87, this.h*0.48, "Next", { fill: '#0ff000' }).setFontSize(50);
+      let nextText = this.add.text(this.w*0.855, this.h*0.48, "Unlock", { fill: '#ffffff' }).setFontSize(50);
 
-      let restart = this.add.rectangle(this.w*0.9,this.h*0.06,this.w*0.1, this.h*0.1, 0xffffff)
+      let restart = this.add.rectangle(this.w*0.9,this.h*0.06,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive()
         .on('pointerdown', () => {
           this.current = 1;
           this.scene.restart();
         });
-      let restartText = this.add.text(this.w*0.85, this.h*0.04, "Restart?", { fill: '#0ff000' }).setFontSize(40);
+      let restartText = this.add.text(this.w*0.85, this.h*0.04, "Restart?", { fill: '#ffffff' }).setFontSize(40);
       
       this.correctAnswers[0] = adj1.text;
-      this.correctAnswers[1] = adj2.text;
-      this.correctAnswers[2] = adj3.text;
-      this.correctAnswers[3] = adj4.text;
+      this.correctAnswers[1] = adj4.text;
+      this.correctAnswers[2] = adj5.text;
+      this.correctAnswers[3] = adj7.text;
 
 
   } 

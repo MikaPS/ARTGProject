@@ -10,6 +10,7 @@ class Fight extends Phaser.Scene {
     preload() {
         this.load.image('rock', './assets/library/rock.png');
     }
+
     create() {
         this.cameras.main.setBackgroundColor('#001133');
         this.w = this.cameras.main.width;
@@ -26,7 +27,7 @@ class Fight extends Phaser.Scene {
         this.attack3 = this.add.text(this.w*0.2, this.h*0.12, "Click blue, gold, and then yellow!").setFontSize(40).setAlpha(0);
         // explain what to do
         this.instructions = this.add.text(this.w*0.2, this.h*0.22, "You can finally fight the deity!\n\nThe Awakeness says how much energy it has left\n(get it to 0 to win!).\n\nThe deity will throw rocks down, destroy them\nby pressing the button underneath the rock!\n\nAfter destroying the rock, you could attack,\nPress the right combinations to win.\nFor example, press the blue button to start the fight!").setFontSize(40);
-
+        this.turn1instructions = this.add.text(this.w*0.2, this.h*0.12, "Click the button below the rock to stop it!").setFontSize(40).setAlpha(0);
 
         let blue = this.add.rectangle(this.w*0.2,this.h*0.9,this.w*0.15, this.w*0.1, 0x1f53a6)
             .setInteractive()
@@ -48,9 +49,10 @@ class Fight extends Phaser.Scene {
             .on('pointerdown', () => {
                 this.playerActions(4);
             });
-        
-        this.rock = this.add.image(this.w*0.2,this.h*0.05, 'rock').setAlpha(0);
 
+        
+        this.xPos = [this.w*0.2, this.w*0.4, this.w*0.6, this.w*0.8];
+        this.rock = this.add.image(Phaser.Math.RND.pick(this.xPos),this.h*0.05, 'rock').setAlpha(0);
     }
 
     update() {
@@ -86,7 +88,14 @@ class Fight extends Phaser.Scene {
     }
 
     playerActions(touch) {
+        if (weapon == 1) {
+            this.dmg = 10;
+        }
+        else if (weapon == 2) {
+            this.dmg = 5;
+        }
         if (this.turn == 1) {
+            this.turn1instructions.setAlpha(0);
             if (this.rock.x == this.w*0.2 && touch == 1) {
                 this.configureRock(this.rock);
                 this.rock.setAlpha(0);
@@ -113,20 +122,25 @@ class Fight extends Phaser.Scene {
 
 
         } else {
+
             if (this.t == -1) {  
                 if (touch == 1) {
-                    this.awake -= 5;
+                    this.awake -= 5 + this.dmg;
                     this.turn = 1;
                     this.t = 1;
                     this.instructions.setAlpha(0);
+                    this.turn1instructions.setAlpha(1);
+
                 }
             }
             if (this.t == 0) {  
                 if (touch == 2) {
-                    this.awake -= 15;
+                    this.awake -= 15 + this.dmg;
                     this.turn = 1;
                     this.t = 1;
                     this.attack1.setAlpha(0);
+                    this.turn1instructions.setAlpha(1);
+
                 }
             }
             else if (this.t == 1) {
@@ -138,11 +152,13 @@ class Fight extends Phaser.Scene {
                     this.count = 2;
                 }
                 if (this.count == 2) {
-                    this.awake -= 45;
+                    this.awake -= 45 + this.dmg;
                     this.turn = 1;
                     this.t = 2;
                     this.count = 0;
                     this.attack2.setAlpha(0);
+                    this.turn1instructions.setAlpha(1);
+
                 }
             }
             else if (this.t == 2) {
@@ -156,11 +172,13 @@ class Fight extends Phaser.Scene {
                     this.count = 3;
                 }
                 if (this.count == 3) {
-                    this.awake -= 50;
+                    this.awake -= 50 + this.dmg;
                     this.turn = 1;
                     this.t = 3;
                     this.count = 0;
                     this.attack3.setAlpha(0);
+                    this.turn1instructions.setAlpha(1);
+
                 }
             }
         }

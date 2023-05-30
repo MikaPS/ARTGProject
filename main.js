@@ -1,3 +1,5 @@
+let weapon = 1;
+
 // main game object
 let config = {
     scale: {
@@ -17,8 +19,10 @@ let config = {
             }
         }
     },
-    scene: [LibraryInside, LibraryHelpDesk, LibraryLock, LibraryPagePuzzle]
+    // scene: [LibraryInside, LibraryHelpDesk, LibraryLock, LibraryPagePuzzle]
     // scene: [Fight, Win, Lose]
+    // scene: [QuickWeapon]
+    scene: [LibraryLock]
 };
 
 let game = new Phaser.Game(config);

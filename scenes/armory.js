@@ -83,6 +83,7 @@ class SmartWeapon extends Phaser.Scene {
             this.answer3a.destroy();
             this.answer3b.destroy();
             if (this.score >= 2) {
+                weapon = 1;
                 this.win.setAlpha(1);
             } else {
                 this.lose.setAlpha(1);
@@ -91,4 +92,49 @@ class SmartWeapon extends Phaser.Scene {
         }
     }
 
+}
+
+class QuickWeapon extends Phaser.Scene {
+    constructor() {
+      super('QuickWeapon');
+      this.score = 0;
+      this.click = 0;
+    }
+
+    prelaod() {}
+    create() {
+        this.w = this.cameras.main.width;
+        this.h = this.cameras.main.height;
+        this.target = this.add.rectangle(this.w*0.5, this.h*0.75, this.w*0.2, this.w*0.2, 0x0000ff)
+        .setInteractive()
+        .on('pointerdown', () => {
+            // this.click += 1;
+            this.score += 1;
+            // this.changeTarget(this.target);
+        });
+
+        this.time.addEvent({
+            delay: 700, // 1 second
+            repeat: 10,
+            callback: () => this.changeTarget(this.target),
+            callbackScope: this,
+        });
+        this.win = this.add.text(this.w*0.1, this.h*0.73, "You are fast enough to get the sword!").setFontSize(60).setAlpha(0);
+
+    }
+
+    update() {
+        if (this.score >= 8) {
+            weapon = 2;
+            this.win.setAlpha(1);
+            this.target.setAlpha(0);
+        }
+    }
+
+    changeTarget(target) {
+        const x = Math.floor(Math.random() * this.sys.game.config.width);
+        const y = Math.floor(Math.random() * this.sys.game.config.height);
+        target.x = x;
+        target.y = y;
+    }
 }
