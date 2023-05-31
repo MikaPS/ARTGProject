@@ -1,3 +1,5 @@
+// check which path
+this.route = 1; // 2= fight, 1= stop early
 
 class Library extends Phaser.Scene {
   constructor() {
@@ -123,16 +125,24 @@ class LibraryPagePuzzle extends Phaser.Scene {
   }
  
   preload() {
-      this.load.image('page1', './assets/library/fight1.jpeg');
-      this.load.image('page2', './assets/library/fight2.jpeg');
-      this.load.image('page3', './assets/library/fight3.jpeg');
-      this.load.image('page4', './assets/library/fight4.jpeg');
-      this.load.image('page5', './assets/library/fight5.jpeg');
-      this.load.image('page6', './assets/library/fight6.jpeg');
-      this.load.image('correct', './assets/library/fightbook.jpg');
+    if (this.route == 1) { // stop the summoning, book 2
+        this.load.image('page1', './assets/library/book2/page1.jpeg');
+        this.load.image('page2', './assets/library/book2/page2.jpeg');
+        this.load.image('page3', './assets/library/book2/page3.jpeg');
+        this.load.image('page4', './assets/library/book2/page4.jpeg');
+        this.load.image('page5', './assets/library/book2/page5.jpeg');
+        this.load.image('page6', './assets/library/book2/page6.jpeg');
+        this.load.image('correct', './assets/library/book2/full_page.jpg');
+    } else { // fight, book 1
+        this.load.image('page1', './assets/library/book1/page1.jpeg');
+        this.load.image('page2', './assets/library/book1/page2.jpeg');
+        this.load.image('page3', './assets/library/book1/page3.jpeg');
+        this.load.image('page4', './assets/library/book1/page4.jpeg');
+        this.load.image('page5', './assets/library/book1/page5.jpeg');
+        this.load.image('page6', './assets/library/book1/page6.jpeg');
+        this.load.image('correct', './assets/library/book1/full_page.jpg');
+    }
       this.load.image('bookshelves', './assets/library/bookshelf_and_books.png');
-
-
   }
 
   create() {
@@ -141,7 +151,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
       this.shelves = this.add.image(this.w*0.5, this.h*0.7, "bookshelves").setScale(1.85).setAlpha(0.6);
       this.add.rectangle(this.w*0.49, this.h*0.89, this.w*0.9, this.h*0.2, 0xf57542).setAlpha(0.65);
       this.help1 = this.add.text(this.w*0.05, this.h*0.82, "Oh no! The page is torn and not readable.\nMatch the pieces of the pages on the bottom side of the\nscreen in their correct locations on the upper side.\nClicking on a page will highlight where it can be placed.").setFontSize(48);
-      this.correct = this.add.image(this.w*0.35, this.h*0.3, "correct").setDepth(2).setScale(0.45).setAlpha(0);
+      this.correct = this.add.image(this.w*0.35, this.h*0.32, "correct").setDepth(2).setScale(0.35).setAlpha(0);
       let currentPage = 0;
       let currentPiece = 0;
       let piece1 = this.add.rectangle(this.w*0.13,this.h*0.18,this.w*0.2, this.h*0.3, 0x000000)
@@ -149,7 +159,6 @@ class LibraryPagePuzzle extends Phaser.Scene {
         .on('pointerdown', () => {
           currentPiece = 1;
           this.checkPage(currentPiece, currentPage)
-          // console.log("placing page");
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
         });
       let piece2 = this.add.rectangle(this.w*0.13,this.h*0.5,this.w*0.2, this.h*0.3, 0x000000)
@@ -157,7 +166,6 @@ class LibraryPagePuzzle extends Phaser.Scene {
           .on('pointerdown', () => {
             currentPiece = 2;
             this.checkPage(currentPiece, currentPage)
-            // console.log("placing page");
             this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
           });
       let piece3 = this.add.rectangle(this.w*0.35,this.h*0.18,this.w*0.2, this.h*0.3, 0x000000)
@@ -165,7 +173,6 @@ class LibraryPagePuzzle extends Phaser.Scene {
         .on('pointerdown', () => {
           currentPiece = 3;
           this.checkPage(currentPiece, currentPage)
-          // console.log("placing page");
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
         });
       let piece4 = this.add.rectangle(this.w*0.35,this.h*0.5,this.w*0.2, this.h*0.3, 0x000000)
@@ -173,7 +180,6 @@ class LibraryPagePuzzle extends Phaser.Scene {
         .on('pointerdown', () => {
           currentPiece = 4;
           this.checkPage(currentPiece, currentPage)
-          // console.log("placing page");
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
         });
       let piece5 = this.add.rectangle(this.w*0.57,this.h*0.18,this.w*0.2, this.h*0.3, 0x000000)
@@ -181,7 +187,6 @@ class LibraryPagePuzzle extends Phaser.Scene {
         .on('pointerdown', () => {
           currentPiece = 5;
           this.checkPage(currentPiece, currentPage)
-          // console.log("placing page");
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
         });
       let piece6 = this.add.rectangle(this.w*0.57,this.h*0.5,this.w*0.2, this.h*0.3, 0x000000)
@@ -189,7 +194,6 @@ class LibraryPagePuzzle extends Phaser.Scene {
         .on('pointerdown', () => {
           currentPiece = 6;
           this.checkPage(currentPiece, currentPage)
-          // console.log("placing page");
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
         });
 
