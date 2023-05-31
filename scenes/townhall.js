@@ -19,6 +19,18 @@ class TownHall extends Phaser.Scene {
           this.scene.start("RebelGroup");
         });
 
+        this.add.rectangle(this.w*0.505,this.h*0.75,this.w*0.15, this.h*0.45, 0xf57542)
+        .setInteractive({useHandCursor: true})
+        .on('pointerdown', () => {
+          this.scene.start("StopSummon");
+        });
+
+        this.add.rectangle(this.w*0.096,this.h*0.75,this.w*0.15, this.h*0.45, 0xf57542)
+        .setInteractive({useHandCursor: true})
+        .on('pointerdown', () => {
+          this.scene.start("FightDeity");
+        });
+
 
         let restart = this.add.rectangle(this.w*0.91,this.h*0.92,this.w*0.15, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
@@ -29,6 +41,28 @@ class TownHall extends Phaser.Scene {
       
     }
     update() {}
+}
+
+class FightDeity extends Phaser.Scene {
+  constructor() {
+    super('FightDeity');
+  }
+
+  preload() {}
+  create() {}
+  update() {}
+
+}
+
+class StopSummon extends Phaser.Scene {
+  constructor() {
+    super('StopSummon');
+  }
+
+  preload() {}
+  create() {}
+  update() {}
+
 }
 
 class RebelGroup extends Phaser.Scene {
