@@ -9,16 +9,22 @@ class Fight extends Phaser.Scene {
 
     preload() {
         this.load.image('rock', './assets/library/rock.png');
+        this.load.image('ground', './assets/townhall/townhall.png');
+
+
     }
 
     create() {
+
         this.cameras.main.setBackgroundColor('#001133');
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
+        this.add.image(this.w*0.5,this.h*0.5, 'ground').setScale(1.05).setDepth(-1).setAlpha(0.5);
+
         // enemy
         // let deity = this.add.rectangle(this.w*0.93,this.h*0.12,this.w*0.1, this.w*0.1, 0xff0000);
-        this.add.text(this.w*0.87, this.h*0.22, "Deity ").setFontSize(40);
-        this.awakeText = this.add.text(this.w*0.87, this.h*0.27, "Awakeness:\n100%").setFontSize(40);
+        this.add.text(this.w*0.87, this.h*0.05, "Deity ").setFontSize(40);
+        this.awakeText = this.add.text(this.w*0.87, this.h*0.1, "Awakeness:\n100%").setFontSize(40);
         // you
         // let player = this.add.rectangle(this.w*0.07,this.h*0.12,this.w*0.1, this.w*0.1, 0xff0000);
         // this.add.text(this.w*0.02, this.h*0.22, "You ").setFontSize(40);
@@ -203,11 +209,17 @@ class Lose extends Phaser.Scene {
     constructor() {
       super('Lose');
     }
+    preload() {
+        this.load.image('badend', './assets/badend.png');
 
+    }
     create() {
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
 
-        this.add.text(this.w*0.5, this.h*0.5, "you lost!").setFontSize(70);
+        this.add.text(this.w*0.7, this.h*0.1, "You lost!").setFontSize(70);
+        this.add.text(this.w*0.6, this.h*0.2, "You couldn't stop the\ndeity on time.\nThe city is destoryed,\nslowly sinking under the\nwater...").setFontSize(50);
+
+        this.add.image(this.w*0.3,this.h*0.5, 'badend').setScale(1.05).setDepth(-1).setAlpha(1);
     }
 }

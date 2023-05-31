@@ -4,7 +4,7 @@ class Map extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('map', './assets/gamemap.png');
+        this.load.image('map', './assets/gamemap.jpg');
     }
 
     create() {
@@ -15,16 +15,22 @@ class Map extends Phaser.Scene {
         this.cameras.main.setBackgroundColor('#001133');
         this.add.text(1300, 100, "Click on each of the\nplaces to move around\nthe world.").setFontSize(40);
 
-        let lib = this.add.rectangle(600, 180, 300,350, 0xff0000)
+        this.add.rectangle(600, 180, 300,350, 0xff0000)
             .setInteractive({useHandCursor: true})
             .on('pointerdown', () => {
                 this.scene.start("Library");
             });
 
-        let ar = this.add.rectangle(620, 620, 200,250, 0x00ff00)
+        this.add.rectangle(300, 450, 290,250, 0x00ff00)
             .setInteractive({useHandCursor: true})
             .on('pointerdown', () => {
                 this.scene.start("Armory");
+            });
+
+        this.add.rectangle(940, 460, 320,320, 0x00ff00)
+            .setInteractive({useHandCursor: true})
+            .on('pointerdown', () => {
+                this.scene.start("TownHall");
             });
 
     }
