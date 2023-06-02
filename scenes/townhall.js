@@ -65,7 +65,6 @@ class TownHall extends Phaser.Scene {
         } else {
           // Typing complete
           this.typingComplete = true;
-          console.log("Typing complete");
         }
       }
     }
@@ -103,6 +102,8 @@ class RebelGroup extends Phaser.Scene {
       this.load.image('ground', './assets/townhall/townhall.png');
     }
     create() {
+      this.cameras.main.fadeIn(400, 0, 0, 0);
+
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
         this.add.image(this.w*0.5,this.h*0.7, 'ground').setScale(2).setDepth(-1);

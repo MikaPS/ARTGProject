@@ -59,7 +59,6 @@ class Armory extends Phaser.Scene {
           } else {
             // Typing complete
             this.typingComplete = true;
-            console.log("Typing complete");
           }
         }
       }
@@ -77,6 +76,8 @@ class SmartWeapon extends Phaser.Scene {
     }
 
     create() {
+        this.cameras.main.fadeIn(400, 0, 0, 0);
+
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
         this.add.image(this.w*0.6, this.h, "bg").setScale(2.2).setAlpha(0.8);
@@ -188,6 +189,8 @@ class QuickWeapon extends Phaser.Scene {
 
     }
     create() {
+        this.cameras.main.fadeIn(400, 0, 0, 0);
+
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
         this.add.image(this.w*0.5, this.h*0.5, "bg").setScale(1.7).setAlpha(0.5);

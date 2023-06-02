@@ -61,7 +61,6 @@ class Library extends Phaser.Scene {
       } else {
         // Typing complete
         this.typingComplete = true;
-        console.log("Typing complete");
       }
     }
   }
@@ -80,6 +79,8 @@ class LibraryHelpDesk extends Phaser.Scene {
   }
 
   create() {
+    this.cameras.main.fadeIn(400, 0, 0, 0);
+
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
     let bg = this.add.image(this.w*0.5,this.h*0.1, 'background').setScale(2).setDepth(-1);
@@ -172,6 +173,8 @@ class LibraryPagePuzzle extends Phaser.Scene {
   }
 
   create() {
+    this.cameras.main.fadeIn(400, 0, 0, 0);
+
       this.w = this.cameras.main.width;
       this.h = this.cameras.main.height;
       this.shelves = this.add.image(this.w*0.5, this.h*0.7, "bookshelves").setScale(1.85).setAlpha(0.6);
@@ -228,7 +231,6 @@ class LibraryPagePuzzle extends Phaser.Scene {
         .on('pointerdown', () => {
             this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
             currentPage = page1;
-            console.log("select the right tile");
         });
 
       let page2 = this.add.image(this.w*0.75,this.h*0.38, 'page2').setScale(0.25)
@@ -236,7 +238,6 @@ class LibraryPagePuzzle extends Phaser.Scene {
         .on('pointerdown', () => {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
           currentPage = page2;
-            console.log("select the right tile");
         });
 
       let page3 = this.add.image(this.w*0.75,this.h*0.62, 'page3').setScale(0.25)
@@ -244,7 +245,6 @@ class LibraryPagePuzzle extends Phaser.Scene {
         .on('pointerdown', () => {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
           currentPage = page3;
-            console.log("select the right tile");
         });
 
       let page4 = this.add.image(this.w*0.90,this.h*0.13, 'page4').setScale(0.25)
@@ -252,7 +252,6 @@ class LibraryPagePuzzle extends Phaser.Scene {
         .on('pointerdown', () => {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
           currentPage = page4;
-            console.log("select the right tile");
         });
 
       let page5 = this.add.image(this.w*0.9,this.h*0.39, 'page5').setScale(0.25)
@@ -260,7 +259,6 @@ class LibraryPagePuzzle extends Phaser.Scene {
         .on('pointerdown', () => {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
           currentPage = page5;
-            console.log("select the right tile");
         });
 
       let page6 = this.add.image(this.w*0.9,this.h*0.65, 'page6').setScale(0.25)
@@ -268,14 +266,12 @@ class LibraryPagePuzzle extends Phaser.Scene {
         .on('pointerdown', () => {
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0x45fffc);
           currentPage = page6;
-            console.log("select the right tile");
         });
 
         this.click = 1;
       let next = this.add.rectangle(this.w*0.1,this.h*0.72,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
-          console.log(this.click);
           if (this.click == 1) {
             this.correct.setAlpha(1);
             this.click = 2;
@@ -342,6 +338,8 @@ class LibraryLockedDoor extends Phaser.Scene {
     this.load.image('door', './assets/library/lockeddoor.png');
   }
   create() {
+    this.cameras.main.fadeIn(400, 0, 0, 0);
+
     this.cameras.main.setBackgroundColor('#001133');
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
@@ -369,6 +367,8 @@ class LibraryLock extends Phaser.Scene {
   }
 
   create() {
+    this.cameras.main.fadeIn(400, 0, 0, 0);
+
     this.cameras.main.setBackgroundColor('#001133');
       this.w = this.cameras.main.width;
       this.h = this.cameras.main.height;
@@ -482,6 +482,8 @@ class LibraryBooks extends Phaser.Scene {
   }
 
   create() {
+    this.cameras.main.fadeIn(400, 0, 0, 0);
+
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
     this.shelves = this.add.image(this.w*0.5, this.h*0.7, "bookshelves").setScale(1.85);
