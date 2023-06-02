@@ -14,7 +14,9 @@ class Map extends Phaser.Scene {
     
         this.add.image(650,550, "map").setScale(1.2).setDepth(1);
         this.cameras.main.setBackgroundColor('#001133');
-        this.add.text(1300, 100, "Click on each of the\nplaces to move around\nthe world.").setFontSize(40);
+        this.add.text(1300, 100, "Click on each of the\nplaces to move around\nthe world.", {
+            fontFamily: 'Spartan'
+          }).setFontSize(40);
 
         this.add.rectangle(600, 180, 300,350, 0xff0000)
             .setInteractive({useHandCursor: true})

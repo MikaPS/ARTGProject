@@ -25,6 +25,7 @@ class Library extends Phaser.Scene {
     this.currentIndex = 0;
     this.time.lastCharacterTime = 0;
 
+
     this.add.rectangle(this.w*0.355, this.h*0.68, this.w*0.05, this.h*0.1, 0xff0000)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
@@ -92,16 +93,32 @@ class LibraryHelpDesk extends Phaser.Scene {
       });
       
     this.bg = this.add.rectangle(this.w*0.43, this.h*0.14, this.w*0.8, this.h*0.15, 0x000000).setAlpha(0.65);
-    this.add.text(this.w*0.05, this.h*0.1, "* Click on the blue rectangle to move on...\nWhen you are given an option, click on the text that fits you\n").setFontSize(40);
+    this.add.text(this.w*0.05, this.h*0.1, "* Click on the blue rectangle to move on...\nWhen you are given an option, click on the text that fits you\n", {
+      fontFamily: 'Spartan'
+    }).setFontSize(40);
 
 
-    this.help1 = this.add.text(this.w*0.1, this.h*0.73, "What are you looking to find?").setFontSize(60);
-    this.answer1 = this.add.text(this.w*0.1, this.h*0.67, "1) How to stop the summoning of the deity?").setFontSize(60).setAlpha(0);
-    this.answer2 = this.add.text(this.w*0.1, this.h*0.8, "2) How to fight the deity?").setFontSize(60).setAlpha(0);
-    this.help2 = this.add.text(this.w*0.1, this.h*0.7, "Unfortunately, this information is hidden\nfrom the average citizen of Atlantis…").setFontSize(60).setAlpha(0);
-    this.help3 = this.add.text(this.w*0.1, this.h*0.7, "If you are determined enough,\nfind the locked books section.").setFontSize(60).setAlpha(0);
-    this.help4 = this.add.text(this.w*0.1, this.h*0.73, "Read the turquoise book.").setFontSize(60).setAlpha(0);
-    this.help5 = this.add.text(this.w*0.1, this.h*0.73, "Read the turquoise book.").setFontSize(60).setAlpha(0);
+    this.help1 = this.add.text(this.w*0.1, this.h*0.73, "What are you looking to find?", {
+      fontFamily: 'Spartan'
+    }).setFontSize(60);
+    this.answer1 = this.add.text(this.w*0.1, this.h*0.67, "1) How to stop the summoning of the deity?", {
+      fontFamily: 'Spartan'
+    }).setFontSize(60).setAlpha(0);
+    this.answer2 = this.add.text(this.w*0.1, this.h*0.8, "2) How to fight the deity?", {
+      fontFamily: 'Spartan'
+    }).setFontSize(60).setAlpha(0);
+    this.help2 = this.add.text(this.w*0.1, this.h*0.7, "Unfortunately, this information is hidden\nfrom the average citizen of Atlantis…", {
+      fontFamily: 'Spartan'
+    }).setFontSize(60).setAlpha(0);
+    this.help3 = this.add.text(this.w*0.1, this.h*0.7, "If you are determined enough,\nfind the locked books section.", {
+      fontFamily: 'Spartan'
+    }).setFontSize(60).setAlpha(0);
+    this.help4 = this.add.text(this.w*0.1, this.h*0.73, "Read the turquoise book.", {
+      fontFamily: 'Spartan'
+    }).setFontSize(60).setAlpha(0);
+    this.help5 = this.add.text(this.w*0.1, this.h*0.73, "Read the turquoise book.", {
+      fontFamily: 'Spartan'
+    }).setFontSize(60).setAlpha(0);
   }
 
   update() {
@@ -179,8 +196,12 @@ class LibraryPagePuzzle extends Phaser.Scene {
       this.h = this.cameras.main.height;
       this.shelves = this.add.image(this.w*0.5, this.h*0.7, "bookshelves").setScale(1.85).setAlpha(0.6);
       this.add.rectangle(this.w*0.49, this.h*0.89, this.w*0.9, this.h*0.2, 0xf57542).setAlpha(0.65);
-      this.help1 = this.add.text(this.w*0.05, this.h*0.82, "Oh no! The page is torn and not readable.\nMatch the pieces of the pages on the bottom side of the\nscreen in their correct locations on the upper side.\nClicking on a page will highlight where it can be placed.").setFontSize(48);
-      this.correct = this.add.image(this.w*0.35, this.h*0.32, "correct").setDepth(2).setScale(0.35).setAlpha(0);
+      this.help1 = this.add.text(this.w*0.05, this.h*0.82, "Oh no! The page is torn and not readable.\nMatch the pieces of the pages on the bottom side of the\nscreen in their correct locations on the upper side.\nClicking on a page will highlight where it can be placed.", {
+        fontFamily: 'Spartan'
+      }).setFontSize(48);
+      this.correct = this.add.image(this.w*0.35, this.h*0.32, "correct", {
+        fontFamily: 'Spartan'
+      }).setDepth(2).setScale(0.35).setAlpha(0);
       let currentPage = 0;
       let currentPiece = 0;
       let piece1 = this.add.rectangle(this.w*0.13,this.h*0.18,this.w*0.2, this.h*0.3, 0x000000)
@@ -281,7 +302,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
           }
         });
 
-      let nextText = this.add.text(this.w*0.07, this.h*0.7, "Next", { fill: '#ffffff' }).setFontSize(50);
+      let nextText = this.add.text(this.w*0.07, this.h*0.7, "Next", { fill: '#ffffff', setFont: 'Spartan' }).setFontSize(50);
       
       let restart = this.add.rectangle(this.w*0.25,this.h*0.72,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
@@ -289,7 +310,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
           this.shelves.destroy();
           this.scene.restart();
         });
-    let restartText = this.add.text(this.w*0.2, this.h*0.7, "Restart?", { fill: '#ffffff' }).setFontSize(40);
+    let restartText = this.add.text(this.w*0.2, this.h*0.7, "Restart?", { fill: '#ffffff', setFont: 'Spartan' }).setFontSize(40);
   } 
   update() {    }
 
@@ -349,7 +370,9 @@ class LibraryLockedDoor extends Phaser.Scene {
         this.door.destroy();
           this.scene.start("LibraryLock")
         });
-    this.add.text(this.w*0.6, this.h*0.1, "You found the hidden chamber of\nthe library. Only true scholars\nwere able to reach it.\n\nClick the door to move inside.").setFontSize(40);
+    this.add.text(this.w*0.6, this.h*0.1, "You found the hidden chamber of\nthe library. Only true scholars\nwere able to reach it.\n\nClick the door to move inside.", {
+      fontFamily: 'Spartan'
+    }).setFontSize(40);
   }
 }
 
@@ -376,18 +399,38 @@ class LibraryLock extends Phaser.Scene {
       this.shelves = this.add.image(this.w*0.5,this.h*0.2, "bookshelves").setAlpha(0.35).setScale(2).setDepth(-1);
 
       this.add.rectangle(this.w*0.49, this.h*0.85, this.w*0.9, this.h*0.2, 0xf57542).setAlpha(0.65);
-      this.help1 = this.add.text(this.w*0.05, this.h*0.77, "You will need to create a key that fits the lock...\nIn four words, how would you describe the lock?\nClick on the words shown above and then 'unlock'\n* Can restart if clicked the wrong words").setFontSize(48);
+      this.help1 = this.add.text(this.w*0.05, this.h*0.77, "You will need to create a key that fits the lock...\nIn four words, how would you describe the lock?\nClick on the words shown above and then 'unlock'\n* Can restart if clicked the wrong words", {
+        fontFamily: 'Spartan'
+      }).setFontSize(48);
 
 
-      this.add.text(this.w*0.35, this.h*0.05, "Your Selection: ").setFontSize(60);
-      let adj1 = this.add.text(this.w*0.1,this.h*0.5, "Rusty").setFontSize(40); this.adjAttribute(adj1);
-      let adj2 = this.add.text(this.w*0.2,this.h*0.5, "New").setFontSize(40); this.adjAttribute(adj2);
-      let adj3 = this.add.text(this.w*0.3,this.h*0.5, "Gold").setFontSize(40); this.adjAttribute(adj3);
-      let adj4 = this.add.text(this.w*0.4,this.h*0.5, "Orange").setFontSize(40); this.adjAttribute(adj4);
-      let adj5 = this.add.text(this.w*0.1,this.h*0.6, "Small").setFontSize(40); this.adjAttribute(adj5);
-      let adj6 = this.add.text(this.w*0.2,this.h*0.6, "Big").setFontSize(40); this.adjAttribute(adj6);
-      let adj7 = this.add.text(this.w*0.3,this.h*0.6, "Warm").setFontSize(40); this.adjAttribute(adj7);
-      let adj8 = this.add.text(this.w*0.4,this.h*0.6, "Cool").setFontSize(40); this.adjAttribute(adj8);
+      this.add.text(this.w*0.35, this.h*0.05, "Your Selection: ", {
+        fontFamily: 'Spartan'
+      }).setFontSize(60);
+      let adj1 = this.add.text(this.w*0.1,this.h*0.5, "Rusty", {
+        fontFamily: 'Spartan'
+      }).setFontSize(40); this.adjAttribute(adj1);
+      let adj2 = this.add.text(this.w*0.2,this.h*0.5, "New", {
+        fontFamily: 'Spartan'
+      }).setFontSize(40); this.adjAttribute(adj2);
+      let adj3 = this.add.text(this.w*0.3,this.h*0.5, "Gold", {
+        fontFamily: 'Spartan'
+      }).setFontSize(40); this.adjAttribute(adj3);
+      let adj4 = this.add.text(this.w*0.4,this.h*0.5, "Orange", {
+        fontFamily: 'Spartan'
+      }).setFontSize(40); this.adjAttribute(adj4);
+      let adj5 = this.add.text(this.w*0.1,this.h*0.6, "Small", {
+        fontFamily: 'Spartan'
+      }).setFontSize(40); this.adjAttribute(adj5);
+      let adj6 = this.add.text(this.w*0.2,this.h*0.6, "Big", {
+        fontFamily: 'Spartan'
+      }).setFontSize(40); this.adjAttribute(adj6);
+      let adj7 = this.add.text(this.w*0.3,this.h*0.6, "Warm", {
+        fontFamily: 'Spartan'
+      }).setFontSize(40); this.adjAttribute(adj7);
+      let adj8 = this.add.text(this.w*0.4,this.h*0.6, "Cool", {
+        fontFamily: 'Spartan'
+      }).setFontSize(40); this.adjAttribute(adj8);
 
       let next = this.add.rectangle(this.w*0.9,this.h*0.5,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
@@ -403,7 +446,7 @@ class LibraryLock extends Phaser.Scene {
           }
         });
 
-      let nextText = this.add.text(this.w*0.855, this.h*0.48, "Unlock", { fill: '#ffffff' }).setFontSize(50);
+      let nextText = this.add.text(this.w*0.855, this.h*0.48, "Unlock", { fill: '#ffffff', setFont: 'Spartan' }).setFontSize(50);
 
       let restart = this.add.rectangle(this.w*0.9,this.h*0.06,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
@@ -411,7 +454,7 @@ class LibraryLock extends Phaser.Scene {
           this.current = 1;
           this.scene.restart();
         });
-      let restartText = this.add.text(this.w*0.85, this.h*0.04, "Restart?", { fill: '#ffffff' }).setFontSize(40);
+      let restartText = this.add.text(this.w*0.85, this.h*0.04, "Restart?", { fill: '#ffffff', setFont: 'Spartan' }).setFontSize(40);
       
       this.correctAnswers[0] = adj1.text;
       this.correctAnswers[1] = adj4.text;
@@ -486,10 +529,14 @@ class LibraryBooks extends Phaser.Scene {
 
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
-    this.shelves = this.add.image(this.w*0.5, this.h*0.7, "bookshelves").setScale(1.85);
+    this.shelves = this.add.image(this.w*0.5, this.h*0.7, "bookshelves", {
+      fontFamily: 'Spartan'
+    }).setScale(1.85);
 
     this.add.rectangle(this.w*0.49, this.h*0.85, this.w*0.9, this.h*0.2, 0x159685).setAlpha(0.75);
-    this.help1 = this.add.text(this.w*0.05, this.h*0.8, "Remeber the book the librarian told you to find.\nThe turquoise one.").setFontSize(48);
+    this.help1 = this.add.text(this.w*0.05, this.h*0.8, "Remeber the book the librarian told you to find.\nThe turquoise one.", {
+      fontFamily: 'Spartan'
+    }).setFontSize(48);
 
     this.add.rectangle(this.w*0.89, this.h*0.47, this.w*0.06, this.h*0.3, 0xffffff).setInteractive({useHandCursor: true}).setDepth(-1)
       .on('pointerdown', () => {
