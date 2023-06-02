@@ -4,18 +4,26 @@ this.route = 1; // 2= fight, 1= stop early
 class Library extends Phaser.Scene {
   constructor() {
     super('Library');
+    this.typingComplete = false;
+    this.text;
+    this.textToType = "The library of Atlantis,one of\nthe most treasured places in\nthe universe.\n\nIt has the know-all blue orb,\nthat can help you find what you\nare looking for.\n\nDespite the many books on\ndisplay,some materials are\nhidden from regular reach.\nCheck the water wall.";
+    this.currentIndex;
   }
 
   preload() {
     this.load.image('background', './assets/library/lib.png');
   }
-
+  
+  
+   
   create() {
     this.cameras.main.fadeIn(400, 0, 0, 0);
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
     this.bg = this.add.image(this.w*0.3,this.h*0.5, 'background').setScale(1.05).setDepth(1);
-    this.add.text(this.w*0.6, this.h*0.1, "The library of Atlantis,one of\nthe most treasured places in\nthe universe.\n\nIt has the know-all blue orb,\nthat can help you find what you\nare looking for.\n\nDespite the many books on\ndisplay,some materials are\nhidden from regular reach.\nCheck the water wall.").setFontSize(40);
+    this.text = this.add.text(this.w*0.6, this.h*0.1, "").setFontSize(40);
+    this.currentIndex = 0;
+    this.time.lastCharacterTime = 0;
 
     this.add.rectangle(this.w*0.355, this.h*0.68, this.w*0.05, this.h*0.1, 0xff0000)
         .setInteractive({useHandCursor: true})
@@ -39,6 +47,23 @@ class Library extends Phaser.Scene {
         });
         let restartText = this.add.text(this.w*0.89, this.h*0.9, "Map", { fill: '#ffffff' }).setFontSize(40);
       
+  }
+  update(time) {
+    if (!this.typingComplete) {
+      // Check if there are characters left to type
+      if (this.currentIndex < this.textToType.length) {
+        // Add the next character to the text object
+        if (time > this.time.lastCharacterTime + 50) {
+          this.text.setText(this.text.text + this.textToType[this.currentIndex]);
+          this.currentIndex++;
+          this.time.lastCharacterTime = time; // Update the last character time
+        }
+      } else {
+        // Typing complete
+        this.typingComplete = true;
+        console.log("Typing complete");
+      }
+    }
   }
 }
 
