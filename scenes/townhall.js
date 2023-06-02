@@ -8,11 +8,16 @@ class TownHall extends Phaser.Scene {
       this.load.image('ground', './assets/townhall/townhall.png');
     }
     create() {
+        
+
+
         this.cameras.main.fadeIn(400, 0, 0, 0);
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
         this.add.image(this.w*0.3,this.h*0.5, 'ground').setScale(1.05).setDepth(1);
-        this.add.text(this.w*0.6, this.h*0.1, "The ruler of Atlantiss\ntarted this meeting to\ndeclare everyone has\nvisitation rights to\nAtlantis.\n\nClick around to see\nreactions of citizens.").setFontSize(50);
+        this.add.text(this.w*0.625, this.h*0.1, "The ruler of Atlantis\nstarted this meeting to\ndeclare everyone has\nvisitation rights to\nAtlantis.\n\nClick around to see\nreactions of citizens.", {
+          fontFamily: 'Spartan',
+        }).setFontSize(50);
         
         this.add.rectangle(this.w*0.3,this.h*0.53,this.w*0.15, this.h*0.2, 0xf57542)
         .setInteractive({useHandCursor: true})
@@ -42,7 +47,10 @@ class TownHall extends Phaser.Scene {
           this.cameras.main.fade(400, 0,0,0);
           this.time.delayedCall(400, () => this.scene.start('Map'));
         });
-        let restartText = this.add.text(this.w*0.89, this.h*0.9, "Map", { fill: '#ffffff' }).setFontSize(40);
+        let restartText = this.add.text(this.w*0.89, this.h*0.9, "Map", {
+          fill: '#ffffff',
+          fontFamily: 'Spartan'
+        }).setFontSize(40);
       
     }
     update() {}
@@ -88,9 +96,15 @@ class RebelGroup extends Phaser.Scene {
         .on('pointerdown', () => {
           this.click += 1;
         });
-        this.text1 = this.add.text(this.w*0.1, this.h*0.75, "A group of rebels stopped the meeting:\n'Atlantis is a scared place', they say.").setFontSize(50).setAlpha(0);
-        this.text2 = this.add.text(this.w*0.1, this.h*0.75, "'We can't let outsiders see the beauty of the city.\nI will summon a deity to sink the city so no one\nwould be able to enter it!'").setFontSize(50).setAlpha(0);
-        this.text3 = this.add.text(this.w*0.1, this.h*0.75, "A deity?\nThere has to be something to stop it!\nMaybe visiting the libray and armory will help").setFontSize(50).setAlpha(0);
+        this.text1 = this.add.text(this.w*0.1, this.h*0.75, "A group of rebels stopped the meeting:\n'Atlantis is a scared place', they say.", {
+          fontFamily: 'Spartan'
+        }).setFontSize(50).setAlpha(0);
+        this.text2 = this.add.text(this.w*0.1, this.h*0.75, "'We can't let outsiders see the beauty of the city.\nI will summon a deity to sink the city so no one\nwould be able to enter it!'", {
+          fontFamily: 'Spartan'
+        }).setFontSize(50).setAlpha(0);
+        this.text3 = this.add.text(this.w*0.1, this.h*0.75, "A deity?\nThere has to be something to stop it!\nMaybe visiting the libray and armory will help", {
+          fontFamily: 'Spartan'
+        }).setFontSize(50).setAlpha(0);
 
     }
     update() {

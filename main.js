@@ -9,6 +9,12 @@ let config = {
         height: 1080
     }, 
     type: Phaser.WEBGL,
+    font: {
+        custom: {
+            families: ['8Bit', 'Spartan'],
+            urls: ['./assets/DiaryOfAn8BitMage-IYDD.ttf', './assets/LeagueSpartan.otf']
+        }
+    },
     physics: {
         default: 'arcade',
         arcade: {
@@ -23,7 +29,8 @@ let config = {
     // scene: [TownHall]
     // scene: [Fight, Win, Lose]
     // scene: [Armory, SmartWeapon, QuickWeapon]
-    scene: [TownHall,RebelGroup, Map, Armory, Library, LibraryHelpDesk, LibraryLockedDoor, LibraryLock, LibraryBooks, LibraryPagePuzzle, QuickWeapon, SmartWeapon, Fight, Win, Lose]
+    //scene: [TownHall, RebelGroup, Map, Armory, Library, LibraryHelpDesk, LibraryLockedDoor, LibraryLock, LibraryBooks, LibraryPagePuzzle, QuickWeapon, SmartWeapon, Fight, Win, Lose]
+    scene: [Title, TownHall, RebelGroup, Map, Armory, Library, LibraryHelpDesk, LibraryLockedDoor, LibraryLock, LibraryBooks, LibraryPagePuzzle, QuickWeapon, SmartWeapon, Fight, Win, Lose]
 };
 
 let game = new Phaser.Game(config);
