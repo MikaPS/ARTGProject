@@ -1,6 +1,11 @@
 class Armory extends Phaser.Scene {
     constructor() {
         super('Armory');
+        this.typingComplete = false;
+        this.text;
+        this.textToType = "The famous armory,\nholding the strongest weapons.\n\nYou can get the one that is\ncurrently in the flame oven.\n\nOr the big sword at the top\nof the wall.\n\nBe careful, the swords\nwould only let worth ones\nhold them.";
+        this.currentIndex;
+    
       }
   
       preload() {
@@ -12,9 +17,13 @@ class Armory extends Phaser.Scene {
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
         this.bg = this.add.image(this.w*0.3, this.h*0.5, "bg").setDepth(1);
-        this.add.text(this.w*0.6, this.h*0.1, "The famous armory,\nholding the strongest weapons.\n\nYou can get the one that is\ncurrently in the flame oven.\n\nOr the big sword at the top\nof the wall.\n\nBe careful, the swords\nwould only let worth ones\nhold them.", {
-            fontFamily: 'Spartan'
-          }).setFontSize(50);
+        //this.add.text(this.w*0.6, this.h*0.1, "The famous armory,\nholding the strongest weapons.\n\nYou can get the one that is\ncurrently in the flame oven.\n\nOr the big sword at the top\nof the wall.\n\nBe careful, the swords\nwould only let worth ones\nhold them.", {
+            //fontFamily: 'Spartan'
+          //}).setFontSize(50);
+        this.text = this.add.text(this.w*0.6, this.h*0.1, "").setFontSize(40);
+        this.currentIndex = 0;
+        this.time.lastCharacterTime = 0;
+    
         this.add.rectangle(this.w*0.28, this.h*0.6, this.w*0.1, this.h*0.1, 0xff0000)
             .setInteractive({useHandCursor: true})
             .on('pointerdown', () => {
@@ -40,6 +49,22 @@ class Armory extends Phaser.Scene {
       
     
     }
+    update(time) {
+        if (!this.typingComplete) {
+          // Check if there are characters left to type
+          if (this.currentIndex < this.textToType.length) {
+            // Add the next character to the text object
+            if (time > this.time.lastCharacterTime + 50) {
+              this.text.setText(this.text.text + this.textToType[this.currentIndex]);
+              this.currentIndex++;
+              this.time.lastCharacterTime = time; // Update the last character time
+            }
+          } else {
+            // Typing complete
+            this.typingComplete = true;
+          }
+        }
+      }
 }
 
 class SmartWeapon extends Phaser.Scene {
@@ -54,6 +79,8 @@ class SmartWeapon extends Phaser.Scene {
     }
 
     create() {
+        this.cameras.main.fadeIn(400, 0, 0, 0);
+
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
         this.add.image(this.w*0.6, this.h, "bg").setScale(2.2).setAlpha(0.8);
@@ -189,6 +216,8 @@ class QuickWeapon extends Phaser.Scene {
 
     }
     create() {
+        this.cameras.main.fadeIn(400, 0, 0, 0);
+
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
         this.add.image(this.w*0.5, this.h*0.5, "bg").setScale(1.7).setAlpha(0.5);

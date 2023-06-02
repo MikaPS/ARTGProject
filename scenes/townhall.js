@@ -2,6 +2,11 @@
 class TownHall extends Phaser.Scene {
     constructor() {
       super('TownHall');
+      this.typingComplete = false;
+      this.text;
+      this.textToType = "The ruler of Atlantis\nstarted this meeting to\ndeclare everyone has\nvisitation rights to\nAtlantis.\n\nClick around to see\nreactions of citizens.";
+      this.currentIndex;
+    
     }
   
     preload() {
@@ -15,10 +20,10 @@ class TownHall extends Phaser.Scene {
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
         this.add.image(this.w*0.3,this.h*0.5, 'ground').setScale(1.05).setDepth(1);
-        this.add.text(this.w*0.625, this.h*0.1, "The ruler of Atlantis\nstarted this meeting to\ndeclare everyone has\nvisitation rights to\nAtlantis.\n\nClick around to see\nreactions of citizens.", {
-          fontFamily: 'Spartan',
-        }).setFontSize(50);
-        
+        this.text = this.add.text(this.w*0.6, this.h*0.1, "").setFontSize(40);
+        this.currentIndex = 0;
+        this.time.lastCharacterTime = 0;
+
         this.add.rectangle(this.w*0.3,this.h*0.53,this.w*0.15, this.h*0.2, 0xf57542)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
@@ -53,7 +58,22 @@ class TownHall extends Phaser.Scene {
         }).setFontSize(40);
       
     }
-    update() {}
+    update(time) {
+      if (!this.typingComplete) {
+        // Check if there are characters left to type
+        if (this.currentIndex < this.textToType.length) {
+          // Add the next character to the text object
+          if (time > this.time.lastCharacterTime + 50) {
+            this.text.setText(this.text.text + this.textToType[this.currentIndex]);
+            this.currentIndex++;
+            this.time.lastCharacterTime = time; // Update the last character time
+          }
+        } else {
+          // Typing complete
+          this.typingComplete = true;
+        }
+      }
+    }
 }
 
 class FightDeity extends Phaser.Scene {
@@ -88,6 +108,8 @@ class RebelGroup extends Phaser.Scene {
       this.load.image('ground', './assets/townhall/townhall.png');
     }
     create() {
+      this.cameras.main.fadeIn(400, 0, 0, 0);
+
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
         this.add.image(this.w*0.5,this.h*0.7, 'ground').setScale(2).setDepth(-1);
