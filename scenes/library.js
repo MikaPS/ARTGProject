@@ -11,6 +11,7 @@ class Library extends Phaser.Scene {
   }
 
   create() {
+    this.cameras.main.fadeIn(400, 0, 0, 0);
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
     this.bg = this.add.image(this.w*0.3,this.h*0.5, 'background').setScale(1.05).setDepth(1);

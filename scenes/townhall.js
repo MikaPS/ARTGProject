@@ -8,6 +8,7 @@ class TownHall extends Phaser.Scene {
       this.load.image('ground', './assets/townhall/townhall.png');
     }
     create() {
+        this.cameras.main.fadeIn(400, 0, 0, 0);
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
         this.add.image(this.w*0.3,this.h*0.5, 'ground').setScale(1.05).setDepth(1);
@@ -16,26 +17,30 @@ class TownHall extends Phaser.Scene {
         this.add.rectangle(this.w*0.3,this.h*0.53,this.w*0.15, this.h*0.2, 0xf57542)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
-          this.scene.start("RebelGroup");
+          this.cameras.main.fade(400, 0,0,0);
+          this.time.delayedCall(400, () => this.scene.start('RebelGroup'));
         });
 
         this.add.rectangle(this.w*0.505,this.h*0.75,this.w*0.15, this.h*0.45, 0xf57542)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
-          this.scene.start("StopSummon");
+          this.cameras.main.fade(400, 0,0,0);
+          this.time.delayedCall(400, () => this.scene.start('StopSummon'));
         });
 
         this.add.rectangle(this.w*0.096,this.h*0.75,this.w*0.15, this.h*0.45, 0xf57542)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
-          this.scene.start("FightDeity");
+          this.cameras.main.fade(400, 0,0,0);
+          this.time.delayedCall(400, () => this.scene.start('FightDeity'));
         });
 
 
         let restart = this.add.rectangle(this.w*0.91,this.h*0.92,this.w*0.15, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
-          this.scene.start("Map");
+          this.cameras.main.fade(400, 0,0,0);
+          this.time.delayedCall(400, () => this.scene.start('Map'));
         });
         let restartText = this.add.text(this.w*0.89, this.h*0.9, "Map", { fill: '#ffffff' }).setFontSize(40);
       

@@ -8,6 +8,7 @@ class Armory extends Phaser.Scene {
       }
 
       create() {
+        this.cameras.main.fadeIn(400, 0, 0, 0);
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
         this.bg = this.add.image(this.w*0.3, this.h*0.5, "bg").setDepth(1);
@@ -15,20 +16,23 @@ class Armory extends Phaser.Scene {
         this.add.rectangle(this.w*0.28, this.h*0.6, this.w*0.1, this.h*0.1, 0xff0000)
             .setInteractive({useHandCursor: true})
             .on('pointerdown', () => {
-            this.scene.start("QuickWeapon");
-        });
+                this.cameras.main.fade(400, 0,0,0);
+                this.time.delayedCall(400, () => this.scene.start('QuickWeapon'));
+            });
 
         this.add.rectangle(this.w*0.21, this.h*0.15, this.w*0.3, this.h*0.1, 0xff0000)
             .setInteractive({useHandCursor: true})
             .on('pointerdown', () => {
-            this.scene.start("SmartWeapon");
+                this.cameras.main.fade(400, 0,0,0);
+                this.time.delayedCall(400, () => this.scene.start('SmartWeapon'));
+
         });
 
         let restart = this.add.rectangle(this.w*0.91,this.h*0.92,this.w*0.15, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
-            this.bg.setAlpha(0);
             this.scene.start("Map");
+            this.bg.setAlpha(0);
         });
         let restartText = this.add.text(this.w*0.89, this.h*0.9, "Map", { fill: '#ffffff' }).setFontSize(40);
       

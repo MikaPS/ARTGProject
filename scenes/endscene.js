@@ -15,7 +15,7 @@ class Fight extends Phaser.Scene {
     }
 
     create() {
-
+        this.cameras.main.fadeIn(400, 0, 0, 0);
         this.cameras.main.setBackgroundColor('#001133');
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;

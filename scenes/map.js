@@ -8,6 +8,7 @@ class Map extends Phaser.Scene {
     }
 
     create() {
+        this.cameras.main.fadeIn(400, 0, 0, 0);
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
     
