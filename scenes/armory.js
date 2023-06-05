@@ -39,13 +39,19 @@ class Armory extends Phaser.Scene {
 
         });
 
+        if (weapon == 1) {
+           this.add.text(this.w*0.6, this.h*0.75, "You got the smart sword!", { fill: '#ffffff', fontFamily: 'Spartan' }).setFontSize(40);
+        } 
+        if (weapon == 2) {
+          this.add.text(this.w*0.6, this.h*0.75, "You got the quick sword!", { fill: '#ffffff', fontFamily: 'Spartan' }).setFontSize(40);
+        }
         let restart = this.add.rectangle(this.w*0.91,this.h*0.92,this.w*0.15, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
             this.scene.start("Map");
             this.bg.setAlpha(0);
         });
-        let restartText = this.add.text(this.w*0.89, this.h*0.9, "Map", { fill: '#ffffff', setFont: 'Spartan' }).setFontSize(40);
+        let restartText = this.add.text(this.w*0.89, this.h*0.9, "Map", { fill: '#ffffff', fontFamily: 'Spartan' }).setFontSize(40);
       
     
     }
@@ -197,8 +203,10 @@ class SmartWeapon extends Phaser.Scene {
             this.click = 7;
         } 
         if (this.click == 7) {
-          this.cameras.main.fade(3300, 0,0,0);
-          this.time.delayedCall(3300, () => this.scene.start('Armory'));
+          this.score = 0;
+          this.click = -1;
+          this.cameras.main.fade(3000, 0,0,0);
+          this.time.delayedCall(3000, () => this.scene.start('Armory'));
         }
     }
 
@@ -271,6 +279,8 @@ class QuickWeapon extends Phaser.Scene {
             this.lose.setAlpha(1);
             this.target.setAlpha(0);
         }
+        this.score = 0;
+        this.click = 0;
         this.cameras.main.fade(3300, 0,0,0);
         this.time.delayedCall(3300, () => this.scene.start('Armory'));
     }

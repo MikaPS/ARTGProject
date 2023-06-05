@@ -1,6 +1,3 @@
-// check which path
-
-
 class Library extends Phaser.Scene {
   constructor() {
     super('Library');
@@ -208,7 +205,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
 
       this.shelves = this.add.image(this.w*0.5, this.h*0.7, "bookshelves").setScale(1.85).setAlpha(0.6);
       this.add.rectangle(this.w*0.49, this.h*0.89, this.w*0.9, this.h*0.2, 0xf57542).setAlpha(0.65);
-      this.help1 = this.add.text(this.w*0.06, this.h*0.82, "Oh no! The page is torn and not readable. Match the pieces of the pages on the bottom\nside of the screen in their correct locations on the upper side. Clicking on a page will\nhighlight where it can be placed.", {
+      this.help1 = this.add.text(this.w*0.06, this.h*0.82, "Oh no! The page is torn and not readable. Match the pieces of the pages on the right\nside of the screen in their correct locations on the left side.\nClicking on a page will highlight where it can be placed.", {
         fontFamily: 'Spartan'
       }).setFontSize(48);
 
@@ -375,7 +372,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
           }
         });
 
-      let nextText = this.add.text(this.w*0.07, this.h*0.7, "Next", { fill: '#ffffff', setFont: 'Spartan' }).setFontSize(50);
+      let nextText = this.add.text(this.w*0.07, this.h*0.7, "Next", { fill: '#ffffff', fontFamily: 'Spartan' }).setFontSize(50);
       
       let restart = this.add.rectangle(this.w*0.25,this.h*0.72,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
@@ -383,7 +380,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
           this.shelves.destroy();
           this.scene.restart();
         });
-    let restartText = this.add.text(this.w*0.2, this.h*0.7, "Restart?", { fill: '#ffffff', setFont: 'Spartan' }).setFontSize(40);
+    let restartText = this.add.text(this.w*0.21, this.h*0.7, "Restart?", { fill: '#ffffff', fontFamily: 'Spartan' }).setFontSize(50);
   } 
   update() {    
       if(this.p1C){
@@ -528,10 +525,10 @@ class LibraryLock extends Phaser.Scene {
       let adj4 = this.add.text(this.w*0.4,this.h*0.5, "Orange", {
         fontFamily: 'Spartan'
       }).setFontSize(40); this.adjAttribute(adj4);
-      let adj5 = this.add.text(this.w*0.1,this.h*0.6, "Small", {
+      let adj5 = this.add.text(this.w*0.1,this.h*0.6, "Brown", {
         fontFamily: 'Spartan'
       }).setFontSize(40); this.adjAttribute(adj5);
-      let adj6 = this.add.text(this.w*0.2,this.h*0.6, "Big", {
+      let adj6 = this.add.text(this.w*0.2,this.h*0.6, "Blue", {
         fontFamily: 'Spartan'
       }).setFontSize(40); this.adjAttribute(adj6);
       let adj7 = this.add.text(this.w*0.3,this.h*0.6, "Warm", {

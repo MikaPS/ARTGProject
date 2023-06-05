@@ -5,11 +5,12 @@ class Fight extends Phaser.Scene {
       this.t = -1;
       this.awake = 100;
       this.count = 0;
+      this.try = 1;
     }
 
     preload() {
         this.load.image('rock', './assets/library/rock.png');
-        this.load.image('ground', './assets/Bossfight.png');
+        this.load.image('bossFight', './assets/Bossfight.png');
         this.load.image('yellow', './assets/yellow.png');
         this.load.image('gold', './assets/gold.png');
         this.load.image('lightBlue', './assets/lightBlue.png');
@@ -22,15 +23,11 @@ class Fight extends Phaser.Scene {
         this.cameras.main.setBackgroundColor('#001133');
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
-        this.add.image(this.w*0.5,this.h*0.5, 'ground').setScale(1.05).setDepth(-1).setAlpha(0.4);
+        this.add.image(this.w*0.5,this.h*0.5, 'bossFight').setScale(1.05).setDepth(-1).setAlpha(0.4);
 
         // enemy
-        // let deity = this.add.rectangle(this.w*0.93,this.h*0.12,this.w*0.1, this.w*0.1, 0xff0000);
-        //this.add.text(this.w*0.87, this.h*0.05, "Deity ").setFontSize(40);
         this.awakeText = this.add.text(this.w*0.87, this.h*0.1, "Awakeness:\n100%").setFontSize(40);
         // you
-        // let player = this.add.rectangle(this.w*0.07,this.h*0.12,this.w*0.1, this.w*0.1, 0xff0000);
-        // this.add.text(this.w*0.02, this.h*0.22, "You ").setFontSize(40);
         this.attack1 = this.add.text(this.w*0.2, this.h*0.12, "Click the light blue square once!", {
             fontFamily: 'Spartan'
           }).setFontSize(40).setAlpha(0);
@@ -76,6 +73,7 @@ class Fight extends Phaser.Scene {
         
         this.xPos = [this.w*0.2, this.w*0.4, this.w*0.6, this.w*0.8];
         this.rock = this.add.image(Phaser.Math.RND.pick(this.xPos),this.h*0.05, 'rock').setAlpha(0);
+
     }
 
     update() {
@@ -93,12 +91,22 @@ class Fight extends Phaser.Scene {
             this.instructions.setAlpha(0);
             }
             this.rock.setAlpha(0);
+
         }
         if (this.awake <= 0) {
             this.scene.start("Win");
         }
         if (this.rock.alpha == 1 && this.rock.y >= this.h) {
-            this.scene.start("Lose");
+            if (this.try <= 3) {
+                this.try += 1;
+                this.turn = 0;
+                this.t = -1;
+                this.awake = 100;
+                this.count = 0;
+                this.scene.restart();
+            } else {
+                this.scene.start("Lose");
+            }
         }
     }
 
@@ -155,10 +163,6 @@ class Fight extends Phaser.Scene {
                     this.turn = 1;
                     this.t = 0;
                     this.instructions.setAlpha(0);
-                    // this.attack1.setAlpha(0);
-                    // this.attack2.setAlpha(0);
-                    // this.attack3.setAlpha(0);
-                    // this.attack4.setAlpha(0);
                     this.turn1instructions.setAlpha(1);
                 }
             }
@@ -251,9 +255,14 @@ class Win extends Phaser.Scene {
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
 
-        this.add.text(this.w*0.7, this.h*0.1, "you won!", {
+        this.add.text(this.w*0.7, this.h*0.1, "You Won!", {
             fontFamily: 'Spartan'
           }).setFontSize(70);
+
+          this.add.text(this.w*0.6, this.h*0.2, "You stopped the deity on time!", {
+            fontFamily: 'Spartan'
+          }).setFontSize(50);
+
 
           this.add.image(this.w*0.3,this.h*0.5, 'winBG')
           .setScale(1.05).setDepth(-1).setAlpha(1);
@@ -264,6 +273,7 @@ class Win extends Phaser.Scene {
              weapon = 1; //1 or 2 depending on what type
              bookType = 0; //1 or 2 depending on what route
              bookCheck = false; 
+             wentToRebel = false;
             this.scene.start("Title");
           });
           let restartText = this.add.text(this.w*0.71, this.h*0.9, "RESTART", { fill: '#ffffff' ,fontFamily: 'Spartan'}).setFontSize(40);
@@ -284,7 +294,7 @@ class Lose extends Phaser.Scene {
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
 
-        this.add.text(this.w*0.7, this.h*0.1, "You lost!", {
+        this.add.text(this.w*0.7, this.h*0.1, "You Lost!", {
             fontFamily: 'Spartan'
           }).setFontSize(70);
         this.add.text(this.w*0.6, this.h*0.2, "You couldn't stop the\ndeity on time.\nThe city is destoryed,\nslowly sinking under the\nwater...", {
@@ -298,6 +308,7 @@ class Lose extends Phaser.Scene {
              weapon = 1; //1 or 2 depending on what type
              bookType = 0; //1 or 2 depending on what route
              bookCheck = false; 
+            wentToRebel = false;
             this.scene.start("Title");
           });
           let restartText = this.add.text(this.w*0.71, this.h*0.9, "RESTART", { fill: '#ffffff' ,fontFamily: 'Spartan'}).setFontSize(40);
