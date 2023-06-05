@@ -30,7 +30,7 @@ let config = {
     },
     // scene: [Library, LibraryHelpDesk, LibraryLockedDoor,LibraryLock,LibraryBooks, LibraryPagePuzzle, Credits]
     // scene: [TownHall, RebelGroup, Fight, Win, Lose]
-    scene: [Fight, Win, Lose]
+    scene: [FightCult, Win, Lose]
     // scene: [Armory, SmartWeapon, QuickWeapon]
     // scene: [LibraryPagePuzzle, Library, TownHall, RebelGroup, Map, Armory, LibraryHelpDesk, LibraryLockedDoor, LibraryLock, LibraryBooks, QuickWeapon, SmartWeapon, Fight, Win, Lose]
     // scene: [Title, Credits, TownHall, RebelGroup, Map, Armory, Library, LibraryHelpDesk, LibraryLockedDoor, LibraryLock, LibraryBooks, LibraryPagePuzzle, QuickWeapon, SmartWeapon, Fight, Win, Lose]
