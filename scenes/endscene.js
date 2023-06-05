@@ -245,7 +245,7 @@ class Win extends Phaser.Scene {
       super('Win');
     }
     preload() {
-        this.load.image('bg', './assets/townhall/townhall.png');
+        this.load.image('winBG', './assets/townhall/townhall.png');
     }
     create() {
         this.w = this.cameras.main.width;
@@ -255,7 +255,7 @@ class Win extends Phaser.Scene {
             fontFamily: 'Spartan'
           }).setFontSize(70);
 
-          this.add.image(this.w*0.3,this.h*0.5, 'bg')
+          this.add.image(this.w*0.3,this.h*0.5, 'winBG')
           .setScale(1.05).setDepth(-1).setAlpha(1);
 
           let restart = this.add.rectangle(this.w*0.75,this.h*0.92,this.w*0.15, this.h*0.1, 0xf57542).setAlpha(0.65)

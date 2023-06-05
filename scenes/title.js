@@ -94,15 +94,15 @@ class Credits extends Phaser.Scene {
 
     this.bg = this.add.image(this.w*0.5,this.h*0.5, "bg").setScale(1.35);
 
-    this.add.text(1300, 100, "Regis Pak, Mika .", {
+    this.add.text(400, 100, "Main Coder: Mika Peer Shalem\nSupport Coder: Regis Pak\nMain Artist: Yize Ma\nSupprt Artist: Jinhao Pan", {
       fontFamily: 'Spartan'
-    }).setFontSize(40);
+    }).setFontSize(90);
 
     this.startTextButton = this.add.rectangle(this.w*0.5,this.h*0.8,this.w*0.15, this.h*0.1, 0xf9a084)
     .setInteractive({useHandCursor: true})
     .on('pointerdown', () => {
       this.cameras.main.fade(400, 0,0,0);
-      this.time.delayedCall(400, () => this.scene.start('Title'));
+      this.time.delayedCall(400, () => this.scene.start('TownHall'));
     });
     this.startText = this.add.text(this.w*0.5, this.h*0.8, "Start", {
       fill: '#ffffff',
