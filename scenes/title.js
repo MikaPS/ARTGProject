@@ -1,4 +1,4 @@
-class Title extends TweenAnimations {
+class Title extends Phaser.Scene {
     constructor() {
         super('Title');
     }
@@ -15,9 +15,14 @@ class Title extends TweenAnimations {
 
         this.bg = this.add.image(this.w*0.5,this.h*0.5, "bg").setScale(1.35);
         this.bgText = this.add.image(this.w*0.5,this.h*0.15, "bgText").setAlpha(0).setOrigin(0.5);
-        this.fade_in(this.bgText, 100,2000);
+        this.tweens.add({
+          targets: this.bgText,
+          alpha: 1,
+          delay: 100,
+          duration: 2000,
+      });
 
-        this.startTextButton = this.add.rectangle(this.w*0.5,this.h*0.4,this.w*0.15, this.h*0.1, 0xf57542)
+        this.startTextButton = this.add.rectangle(this.w*0.5,this.h*0.4,this.w*0.15, this.h*0.1, 0xf9a084)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.cameras.main.fade(400, 0,0,0);
@@ -44,7 +49,7 @@ class Title extends TweenAnimations {
           yoyo: false 
     });
 
-        this.creditTextButton = this.add.rectangle(this.w*0.5,this.h*0.6,this.w*0.15, this.h*0.1, 0xf57542)
+        this.creditTextButton = this.add.rectangle(this.w*0.5,this.h*0.6,this.w*0.15, this.h*0.1, 0xf9a084)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
           this.cameras.main.fade(400, 0,0,0);
@@ -93,7 +98,7 @@ class Credits extends Phaser.Scene {
       fontFamily: 'Spartan'
     }).setFontSize(40);
 
-    this.startTextButton = this.add.rectangle(this.w*0.5,this.h*0.8,this.w*0.15, this.h*0.1, 0xf57542)
+    this.startTextButton = this.add.rectangle(this.w*0.5,this.h*0.8,this.w*0.15, this.h*0.1, 0xf9a084)
     .setInteractive({useHandCursor: true})
     .on('pointerdown', () => {
       this.cameras.main.fade(400, 0,0,0);

@@ -8,17 +8,17 @@ class FightCult extends Phaser.Scene {
       this.blueCheck = false;
       this.lightBlueheck = false;
       this.goldCheck = false;
+      this.yellowCheck = false;
+
     }
 
     preload() {
         this.load.image('rock', './assets/library/rock.png');
-        this.load.image('ground', './assets/townhall/townhall.png');
+        this.load.image('ground', './assets/cultistFight.png');
         this.load.image('yellow', './assets/yellow.png');
         this.load.image('gold', './assets/gold.png');
         this.load.image('lightBlue', './assets/lightBlue.png');
         this.load.image('blue', './assets/blue.png');
-
-
     }
 
     create() {
@@ -26,7 +26,7 @@ class FightCult extends Phaser.Scene {
         this.cameras.main.setBackgroundColor('#001133');
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
-        this.add.image(this.w*0.5,this.h*0.5, 'ground').setScale(1.3).setDepth(-1).setAlpha(0.5);
+        this.add.image(this.w*0.5,this.h*0.5, 'ground').setScale(1.3).setDepth(-1).setAlpha(0.6);
 
         // enemy
         this.awakeText = this.add.text(this.w*0.87, this.h*0.1, "Health:\n100%").setFontSize(40);
@@ -41,7 +41,7 @@ class FightCult extends Phaser.Scene {
             fontFamily: 'Spartan'
           }).setFontSize(40).setAlpha(0);
         // explain what to do
-        this.instructions = this.add.text(this.w*0.2, this.h*0.22, "You have to stop the deity.\n\nWatch out for rocks and destroy them\nby pressing the button underneath the rock.\n\nAfter destroying the rock, go on the attack.\nPress the right combinations to get it's health below 0 and win\n\n(When you are ready, press the blue button to start)", {
+        this.instructions = this.add.text(this.w*0.2, this.h*0.22, "You have to stop the deity.\n\nWatch out for rocks and destroy them by pressing the button when the\nrock touches it.\n\nPress the right combinations to get its health below 0 and win.\n\n(When you are ready, press the blue button to start)", {
             fontFamily: 'Spartan'
           }).setFontSize(40);
         this.turn1instructions = this.add.text(this.w*0.2, this.h*0.12, "Click the button below the rock to stop it!", {
@@ -64,8 +64,21 @@ class FightCult extends Phaser.Scene {
                 this.playerActions(3);
             });
 
-        
+        this.yellow = this.physics.add.image(this.w*0.9,this.h*0.9,"yellow").setScale(0.4).setAlpha(0)
+            .setInteractive({useHandCursor: true})
+            .on('pointerdown', () => {
+                this.playerActions(4);
+            });
         this.xPos = [this.w*0.3, this.w*0.5, this.w*0.7];
+        if (weapon == 2) { 
+            this.yellow.setAlpha(1); 
+            this.yellow.x = this.w*0.8;
+            this.gold.x = this.w*0.6;
+            this.lightblue.x = this.w*0.4;
+            this.blue.x = this.w*0.2;
+            this.xPos = [this.w*0.2, this.w*0.4, this.w*0.6, this.w*0.8];
+        }
+        
         this.rock = this.physics.add.image(Phaser.Math.RND.pick(this.xPos),this.h*0.05, 'rock').setAlpha(0);
        
         this.collideBlue = this.physics.add.collider(this.blue, this.rock, () => {
@@ -76,6 +89,10 @@ class FightCult extends Phaser.Scene {
         });
         this.physics.add.collider(this.gold, this.rock, () => {
             this.goldCheck = true;
+        });
+
+        this.physics.add.collider(this.yellow, this.rock, () => {
+            this.yellowCheck = true;
         });
     }
 
@@ -107,29 +124,40 @@ class FightCult extends Phaser.Scene {
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
         rock.y = 0.05;
-        this.xPos = [this.w*0.3, this.w*0.5, this.w*0.7];
+        if (weapon == 1) {
+            this.xPos = [this.w*0.3, this.w*0.5, this.w*0.7];
+        } else {
+            this.xPos = [this.w*0.2, this.w*0.4, this.w*0.6, this.w*0.8];
+        }
         rock.x = Phaser.Math.RND.pick(this.xPos);
     }
 
     playerActions(touch) {
+        this.dmg = 0;
+        if (weapon == 1) { this.dmg = 5; }
         if (this.turn == 1) {
             this.turn1instructions.setAlpha(0);
-            if (this.rock.x == this.w*0.3 && touch == 1 && this.blueCheck == true) {
+            if (this.rock.x == this.xPos[0] && touch == 1 && this.blueCheck == true) {
                 this.configureRock(this.rock);
                 this.blueCheck = false;
-                this.awake -= 10;
+                this.awake -= 10 + this.dmg;
             }
-            if (this.rock.x == this.w*0.5 && touch == 2 && this.lightBlueCheck == true) {
+            if (this.rock.x == this.xPos[1] && touch == 2 && this.lightBlueCheck == true) {
                 this.configureRock(this.rock);
                 this.lightBlueCheck = false;
-                this.awake -= 10;
+                this.awake -= 10 + this.dmg;
 
             }
-            if (this.rock.x == this.w*0.7 && touch == 3 && this.goldCheck == true ) {
+            if (this.rock.x == this.xPos[2] && touch == 3 && this.goldCheck == true ) {
                 this.configureRock(this.rock);
                 this.goldCheck = false;
-                this.awake -= 10;
+                this.awake -= 10 + this.dmg;
 
+            }
+            if (this.rock.x == this.xPos[3] && touch == 4 && this.yellowCheck == true ) {
+                this.configureRock(this.rock);
+                this.yellowCheck = false;
+                this.awake -= 10 + this.dmg;
             }
         } 
         else {

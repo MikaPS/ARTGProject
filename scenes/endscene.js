@@ -10,7 +10,10 @@ class Fight extends Phaser.Scene {
     preload() {
         this.load.image('rock', './assets/library/rock.png');
         this.load.image('ground', './assets/Bossfight.png');
-
+        this.load.image('yellow', './assets/yellow.png');
+        this.load.image('gold', './assets/gold.png');
+        this.load.image('lightBlue', './assets/lightBlue.png');
+        this.load.image('blue', './assets/blue.png');
 
     }
 
@@ -19,7 +22,7 @@ class Fight extends Phaser.Scene {
         this.cameras.main.setBackgroundColor('#001133');
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
-        this.add.image(this.w*0.5,this.h*0.5, 'ground').setScale(1.05).setDepth(-1).setAlpha(0.7);
+        this.add.image(this.w*0.5,this.h*0.5, 'ground').setScale(1.05).setDepth(-1).setAlpha(0.4);
 
         // enemy
         // let deity = this.add.rectangle(this.w*0.93,this.h*0.12,this.w*0.1, this.w*0.1, 0xff0000);
@@ -42,29 +45,29 @@ class Fight extends Phaser.Scene {
           }).setFontSize(40).setAlpha(0);
 
         // explain what to do
-        this.instructions = this.add.text(this.w*0.22, this.h*0.22, "You have to stop the deity.\n\nWatch out for rocks and destroy them\nby pressing the button underneath the rock.\n\nAfter destroying the rock, go on the attack.\nPress the right combinations to get the awakeness below 0 and win\n\nIt is a memory game, so remember the combo that will be give.\n\n(When you are ready, press the blue button to start)", {
+        this.instructions = this.add.text(this.w*0.22, this.h*0.22, "You have to stop the deity.\n\nWatch out for rocks and destroy them\nby pressing the button underneath the rock.\n\nAfter destroying the rock, go on the attack.\nPress the right combinations to get the awakeness below 0 and win\n\nIt is a memory game, so remember the combo that will be given.\n\n(When you are ready, press the blue button to start)", {
             fontFamily: 'Spartan'
           }).setFontSize(40);
         this.turn1instructions = this.add.text(this.w*0.2, this.h*0.12, "Click the button below the rock to stop it!", {
             fontFamily: 'Spartan'
           }).setFontSize(40).setAlpha(0);
 
-        let blue = this.add.rectangle(this.w*0.2,this.h*0.9,this.w*0.15, this.w*0.1, 0x1f53a6)
+        let blue = this.add.image(this.w*0.2,this.h*0.9,"blue").setScale(0.4)
             .setInteractive({useHandCursor: true})
             .on('pointerdown', () => {
                 this.playerActions(1);
             });
-        let lightblue = this.add.rectangle(this.w*0.4,this.h*0.9,this.w*0.15, this.w*0.1, 0x75a8fa)
+        let lightblue = this.add.image(this.w*0.4,this.h*0.9, "lightBlue").setScale(0.4)
             .setInteractive({useHandCursor: true})
             .on('pointerdown', () => {
                 this.playerActions(2);
             });
-        let gold = this.add.rectangle(this.w*0.6,this.h*0.9,this.w*0.15, this.w*0.1, 0xD4AF37)
+        let gold = this.add.image(this.w*0.6,this.h*0.9, "gold").setScale(0.4)
             .setInteractive({useHandCursor: true})
             .on('pointerdown', () => {
                 this.playerActions(3);
             });
-        let lightgold = this.add.rectangle(this.w*0.8,this.h*0.9,this.w*0.15, this.w*0.1, 0xFFDF00)
+        let lightgold = this.add.image(this.w*0.8,this.h*0.9, "yellow").setScale(0.4)
             .setInteractive({useHandCursor: true})
             .on('pointerdown', () => {
                 this.playerActions(4);
@@ -241,14 +244,31 @@ class Win extends Phaser.Scene {
     constructor() {
       super('Win');
     }
-
+    preload() {
+        this.load.image('bg', './assets/townhall/townhall.png');
+    }
     create() {
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
 
-        this.add.text(this.w*0.5, this.h*0.5, "you won!", {
+        this.add.text(this.w*0.7, this.h*0.1, "you won!", {
             fontFamily: 'Spartan'
           }).setFontSize(70);
+
+          this.add.image(this.w*0.3,this.h*0.5, 'bg')
+          .setScale(1.05).setDepth(-1).setAlpha(1);
+
+          let restart = this.add.rectangle(this.w*0.75,this.h*0.92,this.w*0.15, this.h*0.1, 0xf57542).setAlpha(0.65)
+          .setInteractive({useHandCursor: true})
+          .on('pointerdown', () => {
+             weapon = 1; //1 or 2 depending on what type
+             bookType = 0; //1 or 2 depending on what route
+             bookCheck = false; 
+            this.scene.start("Title");
+          });
+          let restartText = this.add.text(this.w*0.71, this.h*0.9, "RESTART", { fill: '#ffffff' ,fontFamily: 'Spartan'}).setFontSize(40);
+  
+
     }
 }
 
@@ -271,8 +291,16 @@ class Lose extends Phaser.Scene {
             fontFamily: 'Spartan'
           }).setFontSize(50);
 
-        this.add.image(this.w*0.3,this.h*0.5, 'badend', {
-            fontFamily: 'Spartan'
-          }).setScale(1.05).setDepth(-1).setAlpha(1);
+        this.add.image(this.w*0.3,this.h*0.5, 'badend').setScale(1.05).setDepth(-1).setAlpha(1);
+          let restart = this.add.rectangle(this.w*0.75,this.h*0.92,this.w*0.15, this.h*0.1, 0xf57542).setAlpha(0.65)
+          .setInteractive({useHandCursor: true})
+          .on('pointerdown', () => {
+             weapon = 1; //1 or 2 depending on what type
+             bookType = 0; //1 or 2 depending on what route
+             bookCheck = false; 
+            this.scene.start("Title");
+          });
+          let restartText = this.add.text(this.w*0.71, this.h*0.9, "RESTART", { fill: '#ffffff' ,fontFamily: 'Spartan'}).setFontSize(40);
+  
     }
 }

@@ -39,7 +39,7 @@ class TownHall extends Phaser.Scene {
             this.text.setText("");
             this.currentIndex = 0;
             this.typingComplete = true;
-            this.textToType = "You don\'t have time to\nstay here, find something\nthat can stop them!";
+            this.textToType = "You don\'t have time to\nstay here, find something\nthat can stop them!\n\nCome back here after visiting\nthe library and armory.";
             this.typingComplete = false;
           }
 
@@ -48,7 +48,7 @@ class TownHall extends Phaser.Scene {
             wentToRebel = true;
             this.cameras.main.fade(400, 0,0,0);
             this.typingComplete = true;
-            this.textToType = "Hurry and try to find\nsomething that can prevent\nthis disaster upon Atlantis!";
+            this.textToType = "Hurry and try to find\nsomething that can prevent\nthis disaster upon Atlantis!\n\nCome back here after visiting\nthe library and armory.";
             this.time.delayedCall(400, () => this.scene.start('RebelGroup'));
             this.CheckCount = true;
           }
@@ -75,7 +75,7 @@ class TownHall extends Phaser.Scene {
          this.add.rectangle(this.w*0.505,this.h*0.75,this.w*0.15, this.h*0.45, 0xf57542) //Right Side
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
-          if (bookCheck == 0)
+          if (bookType == 0)
           {
             this.text.setText("");
             this.currentIndex = 0;
@@ -83,7 +83,7 @@ class TownHall extends Phaser.Scene {
             this.textToType = "There are guards blocking\nthis pathway, come back later";
             this.typingComplete = false;
           }
-          if(bookCheck == 2)
+          if(bookType == 2)
           {
             this.cameras.main.fade(400, 0,0,0);
             this.time.delayedCall(400, () => this.scene.start('Fight'));
@@ -93,7 +93,7 @@ class TownHall extends Phaser.Scene {
          this.add.rectangle(this.w*0.096,this.h*0.75,this.w*0.15, this.h*0.45, 0xf57542) //Left Side
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
-          if (bookCheck == 0)
+          if (bookType == 0)
           {
             this.text.setText("");
             this.currentIndex = 0;
@@ -101,10 +101,10 @@ class TownHall extends Phaser.Scene {
             this.textToType = "There are guards blocking\nthis pathway, come back later";
             this.typingComplete = false;
           }
-          if(bookCheck == 1)
+          if(bookType == 1)
           {
             this.cameras.main.fade(400, 0,0,0);
-            this.time.delayedCall(400, () => this.scene.start('StopSummon'));
+            this.time.delayedCall(400, () => this.scene.start('FightCult'));
           }
         }); 
 
