@@ -13,8 +13,8 @@ class Title extends TweenAnimations {
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
 
-        this.bg = this.add.image(960,540, "bg").setScale(1.35);
-        this.bgText = this.add.image(900,150, "bgText").setAlpha(0);
+        this.bg = this.add.image(this.w*0.5,this.h*0.5, "bg").setScale(1.35);
+        this.bgText = this.add.image(this.w*0.5,this.h*0.15, "bgText").setAlpha(0).setOrigin(0.5);
         this.fade_in(this.bgText, 100,2000);
 
         this.startTextButton = this.add.rectangle(this.w*0.5,this.h*0.4,this.w*0.15, this.h*0.1, 0xf57542)
@@ -27,13 +27,84 @@ class Title extends TweenAnimations {
           fill: '#ffffff',
           fontFamily: 'Spartan'
         }).setFontSize(50).setOrigin(0.5);
+        this.tweens.add({
+          targets: this.startText,
+          alpha: { from: 0, to: 1 },
+          duration: 2000, 
+          ease: 'Linear',
+          repeat: 0, 
+          yoyo: false 
+      });
+        this.tweens.add({
+          targets: this.startTextButton,
+          alpha: { from: 0, to: 1 },
+          duration: 2000, 
+          ease: 'Linear',
+          repeat: 0, 
+          yoyo: false 
+    });
 
-        this.fade_in(this.startText, 200,2000);
-        this.fade_in(this.startTextButton, 100,2000);
-    }
+        this.creditTextButton = this.add.rectangle(this.w*0.5,this.h*0.6,this.w*0.15, this.h*0.1, 0xf57542)
+        .setInteractive({useHandCursor: true})
+        .on('pointerdown', () => {
+          this.cameras.main.fade(400, 0,0,0);
+          this.time.delayedCall(400, () => this.scene.start('Credits'));
+        });
+        this.creditText = this.add.text(this.w*0.5, this.h*0.6, "Credits", {
+          fill: '#ffffff',
+          fontFamily: 'Spartan'
+        }).setFontSize(50).setOrigin(0.5);
+        this.tweens.add({
+          targets: this.creditText,
+          alpha: { from: 0, to: 1 },
+          duration: 2000, 
+          ease: 'Linear',
+          repeat: 0, 
+          yoyo: false 
+      });
+        this.tweens.add({
+          targets: this.creditTextButton,
+          alpha: { from: 0, to: 1 },
+          duration: 2000, 
+          ease: 'Linear',
+          repeat: 0, 
+          yoyo: false 
+    });
 
-    upload() {}
+  }
+}
+
+class Credits extends Phaser.Scene {
+  constructor() {
+      super("Credits");
+  }
+  preload() {
+    this.load.image('bg', './assets/titlePage.png'); 
+    this.load.image('bgText', './assets/titleText.png'); 
+}
+
+  create() {
+    this.w = this.cameras.main.width;
+    this.h = this.cameras.main.height;
+
+    this.bg = this.add.image(this.w*0.5,this.h*0.5, "bg").setScale(1.35);
+
+    this.add.text(1300, 100, "Regis Pak, Mika .", {
+      fontFamily: 'Spartan'
+    }).setFontSize(40);
+
+    this.startTextButton = this.add.rectangle(this.w*0.5,this.h*0.8,this.w*0.15, this.h*0.1, 0xf57542)
+    .setInteractive({useHandCursor: true})
+    .on('pointerdown', () => {
+      this.cameras.main.fade(400, 0,0,0);
+      this.time.delayedCall(400, () => this.scene.start('Title'));
+    });
+    this.startText = this.add.text(this.w*0.5, this.h*0.8, "Start", {
+      fill: '#ffffff',
+      fontFamily: 'Spartan'
+    }).setFontSize(50).setOrigin(0.5);
     
-    // tween animation for fading in
-
+    
+  }
+  
 }

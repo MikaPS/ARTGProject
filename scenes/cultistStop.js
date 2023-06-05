@@ -1,6 +1,6 @@
-class Fight extends Phaser.Scene {
+class FightCult extends Phaser.Scene {
     constructor() {
-      super('Fight');
+      super('FightCult');
       this.turn = 0; // 0-player, 1-deity
       this.t = -1;
       this.awake = 100;
@@ -9,7 +9,7 @@ class Fight extends Phaser.Scene {
 
     preload() {
         this.load.image('rock', './assets/library/rock.png');
-        this.load.image('ground', './assets/Bossfight.png');
+        this.load.image('ground', './assets/townhall/townhall.png');
 
 
     }
@@ -19,7 +19,7 @@ class Fight extends Phaser.Scene {
         this.cameras.main.setBackgroundColor('#001133');
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
-        this.add.image(this.w*0.5,this.h*0.5, 'ground').setScale(1.05).setDepth(-1).setAlpha(0.7);
+        this.add.image(this.w*0.5,this.h*0.5, 'ground').setScale(1.3).setDepth(-1).setAlpha(0.5);
 
         // enemy
         // let deity = this.add.rectangle(this.w*0.93,this.h*0.12,this.w*0.1, this.w*0.1, 0xff0000);
@@ -147,34 +147,22 @@ class Fight extends Phaser.Scene {
                     this.turn = 1;
                     this.t = 1;
                     this.instructions.setAlpha(0);
-                    this.attack1.setAlpha(0);
-                    this.attack2.setAlpha(0);
-                    this.attack3.setAlpha(0);
                     this.turn1instructions.setAlpha(1);
 
                 }
             }
             if (this.t == 0) {  
-                if (touch == 1) {
-                    this.attack1.setAlpha(0);
-                    this.attack2.setAlpha(0);
-                    this.attack3.setAlpha(0);
-                }
                 if (touch == 2) {
                     this.awake -= 15 + this.dmg;
                     this.turn = 1;
                     this.t = 1;
-                    this.turn1instructions.setAlpha(0);
+                    this.attack1.setAlpha(0);
+                    this.turn1instructions.setAlpha(1);
 
                 }
             }
             else if (this.t == 1) {
                 
-                if (touch == 1) {
-                    this.attack1.setAlpha(0);
-                    this.attack2.setAlpha(0);
-                    this.attack3.setAlpha(0);
-                }
                 if (touch == 3) {
                     this.count = 1;
                 }
@@ -192,11 +180,6 @@ class Fight extends Phaser.Scene {
                 }
             }
             else if (this.t == 2) {
-                if (touch == 1) {
-                    this.attack1.setAlpha(0);
-                    this.attack2.setAlpha(0);
-                    this.attack3.setAlpha(0);
-                }
                 if (touch == 1) {
                     this.count = 1;
                 }
@@ -217,46 +200,5 @@ class Fight extends Phaser.Scene {
                 }
             }
         }
-    }
-}
-
-
-class Win extends Phaser.Scene {
-    constructor() {
-      super('Win');
-    }
-
-    create() {
-        this.w = this.cameras.main.width;
-        this.h = this.cameras.main.height;
-
-        this.add.text(this.w*0.5, this.h*0.5, "you won!", {
-            fontFamily: 'Spartan'
-          }).setFontSize(70);
-    }
-}
-
-class Lose extends Phaser.Scene {
-    constructor() {
-      super('Lose');
-    }
-    preload() {
-        this.load.image('badend', './assets/badend.png');
-
-    }
-    create() {
-        this.w = this.cameras.main.width;
-        this.h = this.cameras.main.height;
-
-        this.add.text(this.w*0.7, this.h*0.1, "You lost!", {
-            fontFamily: 'Spartan'
-          }).setFontSize(70);
-        this.add.text(this.w*0.6, this.h*0.2, "You couldn't stop the\ndeity on time.\nThe city is destoryed,\nslowly sinking under the\nwater...", {
-            fontFamily: 'Spartan'
-          }).setFontSize(50);
-
-        this.add.image(this.w*0.3,this.h*0.5, 'badend', {
-            fontFamily: 'Spartan'
-          }).setScale(1.05).setDepth(-1).setAlpha(1);
     }
 }
