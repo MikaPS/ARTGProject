@@ -1,7 +1,8 @@
 // main game object
 let weapon = 1; //1 or 2 depending on what type
-let bookType = 0; //1 or 2 depending on what route
-let bookCheck = false;
+let bookType = 2; //1 or 2 depending on what route
+let bookCheck = true; 
+// bookcheck needs to be false, book type 0
 
 let config = {
     scale: {
@@ -28,11 +29,11 @@ let config = {
         }
     },
     // scene: [Library, LibraryHelpDesk, LibraryLockedDoor,LibraryLock,LibraryBooks, LibraryPagePuzzle, Credits]
-    // scene: [TownHall]
-    // scene: [Fight, Win, Lose]
+    // scene: [TownHall, RebelGroup, Fight, Win, Lose]
+    scene: [Fight, Win, Lose]
     // scene: [Armory, SmartWeapon, QuickWeapon]
-    //scene: [LibraryPagePuzzle, Library, TownHall, RebelGroup, Map, Armory, LibraryHelpDesk, LibraryLockedDoor, LibraryLock, LibraryBooks, QuickWeapon, SmartWeapon, Fight, Win, Lose]
-    scene: [Title, Credits, TownHall, RebelGroup, Map, Armory, Library, LibraryHelpDesk, LibraryLockedDoor, LibraryLock, LibraryBooks, LibraryPagePuzzle, QuickWeapon, SmartWeapon, Fight, Win, Lose]
+    // scene: [LibraryPagePuzzle, Library, TownHall, RebelGroup, Map, Armory, LibraryHelpDesk, LibraryLockedDoor, LibraryLock, LibraryBooks, QuickWeapon, SmartWeapon, Fight, Win, Lose]
+    // scene: [Title, Credits, TownHall, RebelGroup, Map, Armory, Library, LibraryHelpDesk, LibraryLockedDoor, LibraryLock, LibraryBooks, LibraryPagePuzzle, QuickWeapon, SmartWeapon, Fight, Win, Lose]
 };
 
 let game = new Phaser.Game(config);

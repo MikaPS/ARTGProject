@@ -24,7 +24,7 @@ class Fight extends Phaser.Scene {
         // enemy
         // let deity = this.add.rectangle(this.w*0.93,this.h*0.12,this.w*0.1, this.w*0.1, 0xff0000);
         //this.add.text(this.w*0.87, this.h*0.05, "Deity ").setFontSize(40);
-        this.awakeText = this.add.text(this.w*0.87, this.h*0.1, "Health:\n100%").setFontSize(40);
+        this.awakeText = this.add.text(this.w*0.87, this.h*0.1, "Awakeness:\n100%").setFontSize(40);
         // you
         // let player = this.add.rectangle(this.w*0.07,this.h*0.12,this.w*0.1, this.w*0.1, 0xff0000);
         // this.add.text(this.w*0.02, this.h*0.22, "You ").setFontSize(40);
@@ -37,8 +37,12 @@ class Fight extends Phaser.Scene {
         this.attack3 = this.add.text(this.w*0.2, this.h*0.12, "Click blue, gold, and then yellow!", {
             fontFamily: 'Spartan'
           }).setFontSize(40).setAlpha(0);
+        this.attack4 = this.add.text(this.w*0.2, this.h*0.12, "Click gold, yellow, gold, and yellow!", {
+            fontFamily: 'Spartan'
+          }).setFontSize(40).setAlpha(0);
+
         // explain what to do
-        this.instructions = this.add.text(this.w*0.2, this.h*0.22, "You have to stop the diety.\n\nWatch out for rocks and destroy them\nby pressing the button underneath the rock.\n\nAfter destroying the rock, go on the attack.\nPress the right combinations to get it's health below 0 and win\n\n(When you are ready, press the blue button to start)", {
+        this.instructions = this.add.text(this.w*0.22, this.h*0.22, "You have to stop the deity.\n\nWatch out for rocks and destroy them\nby pressing the button underneath the rock.\n\nAfter destroying the rock, go on the attack.\nPress the right combinations to get the awakeness below 0 and win\n\nIt is a memory game, so remember the combo that will be give.\n\n(When you are ready, press the blue button to start)", {
             fontFamily: 'Spartan'
           }).setFontSize(40);
         this.turn1instructions = this.add.text(this.w*0.2, this.h*0.12, "Click the button below the rock to stop it!", {
@@ -72,7 +76,7 @@ class Fight extends Phaser.Scene {
     }
 
     update() {
-        this.awakeText.setText("Health:\n" + this.awake);
+        this.awakeText.setText("Awakeness:\n" + this.awake);
         if (this.turn == 1) {
             if (this.rock.y >= this.h) {
                 this.configureRock(this.rock);
@@ -103,15 +107,15 @@ class Fight extends Phaser.Scene {
         rock.x = Phaser.Math.RND.pick(this.xPos);
     }
 
+    // touch == which rectangle it clicked
     playerActions(touch) {
         if (weapon == 1) {
-            this.dmg = 10;
-            console.log("YES 1");
+            this.dmg = 5;
         }
         else if (weapon == 2) {
-            this.dmg = 5;
-            console.log("YES 2");
+            this.dmg = 25;
         }
+        // Enemey turn
         if (this.turn == 1) {
             this.turn1instructions.setAlpha(0);
             if (this.rock.x == this.w*0.2 && touch == 1) {
@@ -137,67 +141,56 @@ class Fight extends Phaser.Scene {
             if (this.t == 0) { this.attack1.setAlpha(1); }
             if (this.t == 1) { this.attack2.setAlpha(1); }
             if (this.t == 2) { this.attack3.setAlpha(1); }
+            if (this.t == 3) { this.attack4.setAlpha(1); }
 
-
+        // Player turn
         } else {
-
+            // First try, instructions say click blue
             if (this.t == -1) {  
                 if (touch == 1) {
                     this.awake -= 5 + this.dmg;
                     this.turn = 1;
-                    this.t = 1;
+                    this.t = 0;
                     this.instructions.setAlpha(0);
-                    this.attack1.setAlpha(0);
-                    this.attack2.setAlpha(0);
-                    this.attack3.setAlpha(0);
+                    // this.attack1.setAlpha(0);
+                    // this.attack2.setAlpha(0);
+                    // this.attack3.setAlpha(0);
+                    // this.attack4.setAlpha(0);
                     this.turn1instructions.setAlpha(1);
-
                 }
             }
+            // Turn 1: click light blue once
             if (this.t == 0) {  
-                if (touch == 1) {
-                    this.attack1.setAlpha(0);
-                    this.attack2.setAlpha(0);
-                    this.attack3.setAlpha(0);
-                }
                 if (touch == 2) {
-                    this.awake -= 15 + this.dmg;
+                    this.attack1.setAlpha(0);
+                    this.awake -= 10 + this.dmg;
                     this.turn = 1;
                     this.t = 1;
                     this.turn1instructions.setAlpha(0);
-
                 }
             }
+            // Turn 2: click gold and light blue
             else if (this.t == 1) {
-                
-                if (touch == 1) {
-                    this.attack1.setAlpha(0);
-                    this.attack2.setAlpha(0);
-                    this.attack3.setAlpha(0);
-                }
                 if (touch == 3) {
+                    this.attack2.setAlpha(0);
                     this.count = 1;
                 }
                 if (touch == 2) {
                     this.count = 2;
                 }
                 if (this.count == 2) {
-                    this.awake -= 45 + this.dmg;
+                    this.awake -= 15 + this.dmg;
                     this.turn = 1;
                     this.t = 2;
                     this.count = 0;
-                    this.attack2.setAlpha(0);
                     this.turn1instructions.setAlpha(1);
 
                 }
             }
+            // Turn 3: click blue, gold, light gold
             else if (this.t == 2) {
                 if (touch == 1) {
-                    this.attack1.setAlpha(0);
-                    this.attack2.setAlpha(0);
                     this.attack3.setAlpha(0);
-                }
-                if (touch == 1) {
                     this.count = 1;
                 }
                 if (touch == 3) {
@@ -207,11 +200,34 @@ class Fight extends Phaser.Scene {
                     this.count = 3;
                 }
                 if (this.count == 3) {
-                    this.awake -= 50 + this.dmg;
+                    this.awake -= 25 + this.dmg;
                     this.turn = 1;
                     this.t = 3;
                     this.count = 0;
-                    this.attack3.setAlpha(0);
+                    this.turn1instructions.setAlpha(1);
+
+                }
+            }
+            // Turn 4: gold, yellow, gold, yellow
+            else if (this.t == 3) {
+                if (touch == 3 && this.count == 0) {
+                    this.attack4.setAlpha(0);
+                    this.count = 1;
+                }
+                if (touch == 4 && this.count == 1) {
+                    this.count = 2;
+                }
+                if (touch == 3 && this.count == 2) {
+                    this.count = 3;
+                }
+                if (touch == 4 && this.count == 3) {
+                    this.count = 4;
+                }
+                if (this.count == 4) {
+                    this.awake -= 30 + this.dmg;
+                    this.turn = 1;
+                    this.t = 4;
+                    this.count = 0;
                     this.turn1instructions.setAlpha(1);
 
                 }

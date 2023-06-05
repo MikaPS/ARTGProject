@@ -197,7 +197,8 @@ class SmartWeapon extends Phaser.Scene {
             this.click = 7;
         } 
         if (this.click == 7) {
-            this.scene.start("Armory");
+          this.cameras.main.fade(3300, 0,0,0);
+          this.time.delayedCall(3300, () => this.scene.start('Armory'));
         }
     }
 
@@ -233,13 +234,13 @@ class QuickWeapon extends Phaser.Scene {
 
         this.time.addEvent({
             delay: 900, // 1 second
-            repeat: 23,
+            repeat: 20,
             callback: () => this.changeTarget(this.target),
             callbackScope: this,
         });
 
         this.time.addEvent({
-            delay: 15000, // 1 second
+            delay: 10000, // 1 second
             callback: () => this.end(),
         });
         this.rect = this.add.rectangle(this.w*0.49, this.h*0.85, this.w*0.9, this.h*0.2, 0xf57542).setAlpha(0.65);
@@ -270,10 +271,8 @@ class QuickWeapon extends Phaser.Scene {
             this.lose.setAlpha(1);
             this.target.setAlpha(0);
         }
-        this.time.addEvent({
-            delay: 3000, // 1 second
-            callback: () => this.scene.start("Armory"),
-        });
+        this.cameras.main.fade(3300, 0,0,0);
+        this.time.delayedCall(3300, () => this.scene.start('Armory'));
     }
 
     changeTarget(target) {

@@ -167,6 +167,7 @@ class LibraryHelpDesk extends Phaser.Scene {
     } else if (this.click ==5) {
       this.bg.destroy();
       this.scene.start("Library");
+      this.click = 0;
     }
   }
 }
@@ -369,6 +370,9 @@ class LibraryPagePuzzle extends Phaser.Scene {
             this.click = 2;
             bookCheck = true;
           }
+          else {
+            this.scene.restart();
+          }
         });
 
       let nextText = this.add.text(this.w*0.07, this.h*0.7, "Next", { fill: '#ffffff', setFont: 'Spartan' }).setFontSize(50);
@@ -540,7 +544,7 @@ class LibraryLock extends Phaser.Scene {
       let next = this.add.rectangle(this.w*0.9,this.h*0.5,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
-          if (this.checkAnswers()) {
+          if (this.checkAnswers() == true) {
             this.current = 1;
             this.shelves.destroy();
             this.scene.start("LibraryBooks");
@@ -551,7 +555,7 @@ class LibraryLock extends Phaser.Scene {
           }
         });
 
-      let nextText = this.add.text(this.w*0.855, this.h*0.48, "Unlock", { fill: '#ffffff', setFont: 'Spartan' }).setFontSize(50);
+      let nextText = this.add.text(this.w*0.855, this.h*0.48, "Unlock", { fill: '#ffffff', fontFamily: 'Spartan' }).setFontSize(50);
 
       let restart = this.add.rectangle(this.w*0.9,this.h*0.06,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
@@ -559,7 +563,7 @@ class LibraryLock extends Phaser.Scene {
           this.current = 1;
           this.scene.restart();
         });
-      let restartText = this.add.text(this.w*0.85, this.h*0.04, "Restart?", { fill: '#ffffff', setFont: 'Spartan' }).setFontSize(40);
+      let restartText = this.add.text(this.w*0.855, this.h*0.04, "Restart?", { fill: '#ffffff', fontFamily: 'Spartan' }).setFontSize(50);
       
       this.correctAnswers[0] = adj1.text;
       this.correctAnswers[1] = adj4.text;
@@ -610,9 +614,10 @@ class LibraryLock extends Phaser.Scene {
   
     var sortedArray1 = this.correctAnswers.sort();
     var sortedArray2 = this.playerAnswers.sort();
-    
     for (var i = 0; i < sortedArray1.length; i++) {
       if (sortedArray1[i] !== sortedArray2[i]) {
+        this.current = 1;
+        this.scene.restart();
         return false;
       }
     }
@@ -653,53 +658,3 @@ class LibraryBooks extends Phaser.Scene {
 
   update() {}
 }
-
-/*
-class Timer extends Phaser.Scene {
-    constructor() {
-        super('timer');
-        this.shakeDuration = 500; // Duration of the shake in milliseconds
-        this.shakeIntensity = 0.05; // Intensity of the shake (0.0 - 1.0)
-        this.shakeTimer = 0;
-    }
-   
-
-    preload() {
-        // this.load.image('boat', './assets/boat/woodboat.png');
-        // this.load.image('background', './assets/bg.jpeg'); 
-    }
-
-    create() {
-        this.cameras.main.setPosition(0, 0);
-
-        this.add.rectangle(100,100,100,100,0xff00ff);
-        // 10 seconds timer
-        var timerText = this.add.text(400, 300, '10', { font: '48px Arial', fill: '#ffffff' });
-        timerText.setOrigin(0.5);
-      
-        var timer = this.time.addEvent({
-          delay: 1000, // 1 second
-          repeat: 2, // Repeat 9 more times (10 in total)
-          callback: updateTimer,
-          callbackScope: this,
-        });
-      
-        function updateTimer() {
-          var remainingTime = timer.repeatCount;
-          timerText.setText(remainingTime);
-          if (remainingTime <= 0) {
-            timerComplete();
-          }
-        }
-      
-        function timerComplete() {
-            this.cameras.main.shake(200, 1);
-            console.log("here");
-            timerText.setText('Timer complete!');
-          // Do something when the timer completes
-        }
-      
-    } 
-    update() {    }
-}
-*/

@@ -1,4 +1,4 @@
-
+let wentToRebel = false;
 class TownHall extends Phaser.Scene {
     constructor() {
       super('TownHall');
@@ -45,6 +45,7 @@ class TownHall extends Phaser.Scene {
 
           if (!this.CheckCount && !itemCheck)
           {
+            wentToRebel = true;
             this.cameras.main.fade(400, 0,0,0);
             this.typingComplete = true;
             this.textToType = "Hurry and try to find\nsomething that can prevent\nthis disaster upon Atlantis!";
@@ -58,13 +59,13 @@ class TownHall extends Phaser.Scene {
             this.text.setText("");
             this.currentIndex = 0;
             this.typingComplete = true;
-            if(bookCheck == 1)
+            if(bookType == 2)
             {
-              this.textToType = "The rebels are gone, but\n left a trail downwards.\nYou should check out the right statue";
+              this.textToType = "The rebels are gone, but\n left a trail downwards.\nYou should check out the right\nstatue";
             }
-            if(bookCheck == 2)
+            if(bookType == 1)
             {
-              this.textToType = "The rebels are gone, but\n left a trail downwards.\nYou should check out the left statue";
+              this.textToType = "The rebels are gone, but\n left a trail downwards.\nYou should check out the left\nstatue";
             }
             this.typingComplete = false;
           }
@@ -108,16 +109,18 @@ class TownHall extends Phaser.Scene {
         }); 
 
 
-        let restart = this.add.rectangle(this.w*0.91,this.h*0.92,this.w*0.15, this.h*0.1, 0xf57542).setAlpha(0.65)
+        this.restart = this.add.rectangle(this.w*0.91,this.h*0.92,this.w*0.15, this.h*0.1, 0xf57542).setAlpha(0) // 0.65
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
+          if (wentToRebel == true) {
           this.cameras.main.fade(400, 0,0,0);
           this.time.delayedCall(400, () => this.scene.start('Map'));
+          } 
         });
-        let restartText = this.add.text(this.w*0.89, this.h*0.9, "Map", {
+        this.restartText = this.add.text(this.w*0.89, this.h*0.9, "Map", {
           fill: '#ffffff',
           fontFamily: 'Spartan'
-        }).setFontSize(40);
+        }).setFontSize(40).setAlpha(0);
       
     }
     update(time) { //Text Scroll Speed
@@ -134,6 +137,11 @@ class TownHall extends Phaser.Scene {
           // Typing complete
           this.typingComplete = true;
         }
+      }
+
+      if (wentToRebel == true) { 
+          this.restart.setAlpha(0.65);
+          this.restartText.setAlpha(1);
       }
     }
 }
