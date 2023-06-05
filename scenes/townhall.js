@@ -147,17 +147,6 @@ class TownHall extends Phaser.Scene {
 }
 
 
-class StopSummon extends Phaser.Scene {
-  constructor() {
-    super('StopSummon');
-  }
-
-  preload() {}
-  create() {}
-  update() {}
-
-}
-
 class RebelGroup extends Phaser.Scene {
     constructor() {
       super('RebelGroup');

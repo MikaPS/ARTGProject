@@ -270,10 +270,9 @@ class Win extends Phaser.Scene {
           let restart = this.add.rectangle(this.w*0.75,this.h*0.92,this.w*0.15, this.h*0.1, 0xf57542).setAlpha(0.65)
           .setInteractive({useHandCursor: true})
           .on('pointerdown', () => {
-             weapon = 1; //1 or 2 depending on what type
+             weapon = 0; //1 or 2 depending on what type
              bookType = 0; //1 or 2 depending on what route
              bookCheck = false; 
-             wentToRebel = false;
             this.scene.start("Title");
           });
           let restartText = this.add.text(this.w*0.71, this.h*0.9, "RESTART", { fill: '#ffffff' ,fontFamily: 'Spartan'}).setFontSize(40);
@@ -305,10 +304,9 @@ class Lose extends Phaser.Scene {
           let restart = this.add.rectangle(this.w*0.75,this.h*0.92,this.w*0.15, this.h*0.1, 0xf57542).setAlpha(0.65)
           .setInteractive({useHandCursor: true})
           .on('pointerdown', () => {
-             weapon = 1; //1 or 2 depending on what type
+             weapon = 0; //1 or 2 depending on what type
              bookType = 0; //1 or 2 depending on what route
              bookCheck = false; 
-            wentToRebel = false;
             this.scene.start("Title");
           });
           let restartText = this.add.text(this.w*0.71, this.h*0.9, "RESTART", { fill: '#ffffff' ,fontFamily: 'Spartan'}).setFontSize(40);

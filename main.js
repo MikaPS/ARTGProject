@@ -1,5 +1,5 @@
 // main game object
-let weapon = 1; //1 or 2 depending on what type
+let weapon = 0; //1 or 2 depending on what type
 let bookType = 0; //1 or 2 depending on what route
 let bookCheck = false; 
 

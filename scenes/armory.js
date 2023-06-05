@@ -281,8 +281,8 @@ class QuickWeapon extends Phaser.Scene {
         }
         this.score = 0;
         this.click = 0;
-        this.cameras.main.fade(3300, 0,0,0);
-        this.time.delayedCall(3300, () => this.scene.start('Armory'));
+        this.cameras.main.fade(3000, 0,0,0);
+        this.time.delayedCall(3000, () => this.scene.start('Armory'));
     }
 
     changeTarget(target) {
