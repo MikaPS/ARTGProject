@@ -15,7 +15,7 @@ class FightCult extends Phaser.Scene {
 
     preload() {
         this.load.image('rock', './assets/library/rock.png');
-        this.load.image('cult', './assets/cultistFight.png');
+        this.load.image('cult', './assets/CultistFight.png');
         this.load.image('yellow', './assets/yellow.png');
         this.load.image('gold', './assets/gold.png');
         this.load.image('lightBlue', './assets/lightBlue.png');
