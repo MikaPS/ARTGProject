@@ -42,7 +42,7 @@ class Fight extends Phaser.Scene {
           }).setFontSize(40).setAlpha(0);
 
         // explain what to do
-        this.instructions = this.add.text(this.w*0.22, this.h*0.22, "You have to stop the deity.\n\nWatch out for rocks and destroy them\nby pressing the button underneath the rock.\n\nAfter destroying the rock, go on the attack.\nPress the right combinations to get the awakeness below 0 and win\n\nIt is a memory game, so remember the combo that will be given.\n\n(When you are ready, press the blue button to start)", {
+        this.instructions = this.add.text(this.w*0.22, this.h*0.22, "You have to stop the deity.\n\nWatch out for rocks and destroy them\nby pressing the button underneath the rock.\n\nAfter destroying the rock, go on the attack.\nPress the right combinations to get the awakeness below 0 and win\n\nIt is a memory game, so remember the combo that will be given.\n\nColors: blue, light blue, gold, yellow.\n\n(When you are ready, press the blue button to start)", {
             fontFamily: 'Spartan'
           }).setFontSize(40);
         this.turn1instructions = this.add.text(this.w*0.2, this.h*0.12, "Click the button below the rock to stop it!", {
