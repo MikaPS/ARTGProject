@@ -1,27 +1,30 @@
 // check which path
-this.route = 1; // 2= fight, 1= stop early
+
 
 class Library extends Phaser.Scene {
   constructor() {
     super('Library');
     this.typingComplete = false;
     this.text;
-    this.textToType = "The library of Atlantis,one of\nthe most treasured places in\nthe universe.\n\nIt has the know-all blue orb,\nthat can help you find what you\nare looking for.\n\nDespite the many books on\ndisplay,some materials are\nhidden from regular reach.\nCheck the water wall.";
+    this.textToType = "The library of Atlantis, one of\nthe most treasured places in\nthe universe.\n\nIt has the know-all blue orb,\nthat can help you find what you\nare looking for.";
     this.currentIndex;
   }
 
   preload() {
-    this.load.image('background', './assets/library/lib.png');
+    this.load.image('background', './assets/library/LibraryGlimmer.JPG');
   }
   
   
    
   create() {
+    this.cameras.main.setBackgroundColor('#001133');
     this.cameras.main.fadeIn(400, 0, 0, 0);
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
     this.bg = this.add.image(this.w*0.3,this.h*0.5, 'background').setScale(1.05).setDepth(1);
-    this.text = this.add.text(this.w*0.6, this.h*0.1, "").setFontSize(40);
+    this.text = this.add.text(this.w*0.6, this.h*0.1, "", {
+      fontFamily: 'Spartan'
+    }).setFontSize(50);
     this.currentIndex = 0;
     this.time.lastCharacterTime = 0;
 
@@ -36,8 +39,19 @@ class Library extends Phaser.Scene {
       this.add.rectangle(this.w*0.3, this.h*0.4, this.w*0.06, this.h*0.5, 0xff0000)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
-          this.bg.destroy();
-          this.scene.start("LibraryLockedDoor");
+          if(bookType > 0)
+          {
+            this.bg.destroy();
+            this.scene.start("LibraryLockedDoor");
+          }
+          if (bookType == 0)
+          {
+            this.text.setText("");
+            this.currentIndex = 0;
+            this.typingComplete = true;
+            this.textToType = "Don't enter something you\ndon't know, check the\nall knowing orb first";
+            this.typingComplete = false;
+          }
         });
 
         let restart = this.add.rectangle(this.w*0.91,this.h*0.92,this.w*0.15, this.h*0.1, 0xf57542).setAlpha(0.65)
@@ -49,12 +63,12 @@ class Library extends Phaser.Scene {
         let restartText = this.add.text(this.w*0.89, this.h*0.9, "Map", { fill: '#ffffff' }).setFontSize(40);
       
   }
-  update(time) {
+  update(time) { //Text Scroll Speed
     if (!this.typingComplete) {
       // Check if there are characters left to type
       if (this.currentIndex < this.textToType.length) {
         // Add the next character to the text object
-        if (time > this.time.lastCharacterTime + 50) {
+        if (time > this.time.lastCharacterTime + 30) {
           this.text.setText(this.text.text + this.textToType[this.currentIndex]);
           this.currentIndex++;
           this.time.lastCharacterTime = time; // Update the last character time
@@ -72,7 +86,6 @@ class LibraryHelpDesk extends Phaser.Scene {
   constructor() {
     super('LibraryHelpDesk');
     this.click = 0;
-    this.route = 0;
   }
 
   preload() {
@@ -80,11 +93,12 @@ class LibraryHelpDesk extends Phaser.Scene {
   }
 
   create() {
+    this.cameras.main.setBackgroundColor('#001133');
     this.cameras.main.fadeIn(400, 0, 0, 0);
 
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
-    let bg = this.add.image(this.w*0.5,this.h*0.1, 'background').setScale(2).setDepth(-1);
+    this.bg = this.add.image(this.w*0.5,this.h*0.1, 'background').setScale(2).setDepth(-1);
 
     this.add.rectangle(this.w*0.5, this.h*0.75, this.w*0.9, this.h*0.35, 0x0000ff).setAlpha(0.65)
       .setInteractive({useHandCursor: true})
@@ -92,13 +106,8 @@ class LibraryHelpDesk extends Phaser.Scene {
         this.click += 1;
       });
       
-    this.bg = this.add.rectangle(this.w*0.43, this.h*0.14, this.w*0.8, this.h*0.15, 0x000000).setAlpha(0.65);
-    this.add.text(this.w*0.05, this.h*0.1, "* Click on the blue rectangle to move on...\nWhen you are given an option, click on the text that fits you\n", {
-      fontFamily: 'Spartan'
-    }).setFontSize(40);
 
-
-    this.help1 = this.add.text(this.w*0.1, this.h*0.73, "What are you looking to find?", {
+    this.help1 = this.add.text(this.w*0.1, this.h*0.725, "What are you looking to find?", {
       fontFamily: 'Spartan'
     }).setFontSize(60);
     this.answer1 = this.add.text(this.w*0.1, this.h*0.67, "1) How to stop the summoning of the deity?", {
@@ -128,14 +137,14 @@ class LibraryHelpDesk extends Phaser.Scene {
   changeText() {
     if (this.click == 1) {
       this.help1.destroy();
-      this.answer1.setAlpha(1).setInteractive({useHandCursor: true})
+      this.answer1.setAlpha(1).setInteractive({useHandCursor: true}) //1 is stop summon
         .on('pointerdown', () => {
-          this.route = 1;
+          bookType = 1;
           this.click = 2;
         });
-      this.answer2.setAlpha(1).setInteractive({useHandCursor: true})
+      this.answer2.setAlpha(1).setInteractive({useHandCursor: true}) //2 is fight 
       .on('pointerdown', () => {
-        this.route = 2;
+        bookType = 2;
         this.click = 2;
       });
     }
@@ -150,7 +159,7 @@ class LibraryHelpDesk extends Phaser.Scene {
     }
     else if (this.click == 4) {
       this.help3.destroy();
-      if (this.route == 1) {
+      if (bookType == 1) {
         this.help4.setAlpha(1);
       } else {
         this.help5.setAlpha(1);
@@ -169,7 +178,7 @@ class LibraryPagePuzzle extends Phaser.Scene {
   }
  
   preload() {
-    if (this.route == 1) { // stop the summoning, book 2
+    if (bookType == 1) { // stop the summoning, book 2
         this.load.image('page1', './assets/library/book2/page1.jpeg');
         this.load.image('page2', './assets/library/book2/page2.jpeg');
         this.load.image('page3', './assets/library/book2/page3.jpeg');
@@ -190,18 +199,28 @@ class LibraryPagePuzzle extends Phaser.Scene {
   }
 
   create() {
-    this.cameras.main.fadeIn(400, 0, 0, 0);
-
+      this.cameras.main.setBackgroundColor('#001133');
+      this.cameras.main.fadeIn(400, 0, 0, 0);
+      
       this.w = this.cameras.main.width;
       this.h = this.cameras.main.height;
+
       this.shelves = this.add.image(this.w*0.5, this.h*0.7, "bookshelves").setScale(1.85).setAlpha(0.6);
       this.add.rectangle(this.w*0.49, this.h*0.89, this.w*0.9, this.h*0.2, 0xf57542).setAlpha(0.65);
-      this.help1 = this.add.text(this.w*0.05, this.h*0.82, "Oh no! The page is torn and not readable.\nMatch the pieces of the pages on the bottom side of the\nscreen in their correct locations on the upper side.\nClicking on a page will highlight where it can be placed.", {
+      this.help1 = this.add.text(this.w*0.06, this.h*0.82, "Oh no! The page is torn and not readable. Match the pieces of the pages on the bottom\nside of the screen in their correct locations on the upper side. Clicking on a page will\nhighlight where it can be placed.", {
         fontFamily: 'Spartan'
       }).setFontSize(48);
-      this.correct = this.add.image(this.w*0.35, this.h*0.32, "correct", {
-        fontFamily: 'Spartan'
-      }).setDepth(2).setScale(0.35).setAlpha(0);
+
+      this.correct = this.add.image(this.w*0.675, this.h*0.4, "correct").setDepth(2).setScale(0.35).setAlpha(0);
+
+      this.p1C = false; //Piece 1 Check
+      this.p2C = false;
+      this.p3C = false;
+      this.p4C = false;
+      this.p5C = false;
+      this.p6C = false;
+      this.pC = false; //all pieces checked
+
       let currentPage = 0;
       let currentPiece = 0;
       let piece1 = this.add.rectangle(this.w*0.13,this.h*0.18,this.w*0.2, this.h*0.3, 0x000000)
@@ -210,6 +229,14 @@ class LibraryPagePuzzle extends Phaser.Scene {
           currentPiece = 1;
           this.checkPage(currentPiece, currentPage)
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
+          if(currentPage == page1)
+          {
+            this.p1C = true;
+          }
+          else if (currentPage != page1)
+          {
+            this.p1C = false;
+          }
         });
       let piece2 = this.add.rectangle(this.w*0.13,this.h*0.5,this.w*0.2, this.h*0.3, 0x000000)
         .setInteractive({useHandCursor: true})
@@ -217,6 +244,14 @@ class LibraryPagePuzzle extends Phaser.Scene {
             currentPiece = 2;
             this.checkPage(currentPiece, currentPage)
             this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
+            if(currentPage == page2)
+          {
+            this.p2C = true;
+          }
+          else if (currentPage != page2)
+          {
+            this.p2C = false;
+          }
           });
       let piece3 = this.add.rectangle(this.w*0.35,this.h*0.18,this.w*0.2, this.h*0.3, 0x000000)
         .setInteractive({useHandCursor: true})
@@ -224,6 +259,14 @@ class LibraryPagePuzzle extends Phaser.Scene {
           currentPiece = 3;
           this.checkPage(currentPiece, currentPage)
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
+          if(currentPage == page3)
+          {
+            this.p3C = true;
+          }
+          else if (currentPage != page3)
+          {
+            this.p3C = false;
+          }
         });
       let piece4 = this.add.rectangle(this.w*0.35,this.h*0.5,this.w*0.2, this.h*0.3, 0x000000)
         .setInteractive({useHandCursor: true})
@@ -231,6 +274,14 @@ class LibraryPagePuzzle extends Phaser.Scene {
           currentPiece = 4;
           this.checkPage(currentPiece, currentPage)
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
+          if(currentPage == page4)
+          {
+            this.p4C = true;
+          }
+          else if (currentPage != page4)
+          {
+            this.p5C = false;
+          }
         });
       let piece5 = this.add.rectangle(this.w*0.57,this.h*0.18,this.w*0.2, this.h*0.3, 0x000000)
         .setInteractive({useHandCursor: true})
@@ -238,6 +289,14 @@ class LibraryPagePuzzle extends Phaser.Scene {
           currentPiece = 5;
           this.checkPage(currentPiece, currentPage)
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
+          if(currentPage == page5)
+          {
+            this.p5C = true;
+          }
+          else if (currentPage != page5)
+          {
+            this.p5C = false;
+          }
         });
       let piece6 = this.add.rectangle(this.w*0.57,this.h*0.5,this.w*0.2, this.h*0.3, 0x000000)
         .setInteractive({useHandCursor: true})
@@ -245,6 +304,14 @@ class LibraryPagePuzzle extends Phaser.Scene {
           currentPiece = 6;
           this.checkPage(currentPiece, currentPage)
           this.highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, 0xff0000);
+          if(currentPage == page6)
+          {
+            this.p6C = true;
+          }
+          else if (currentPage != page6)
+          {
+            this.p6C = false;
+          }
         });
 
       let page1 = this.add.image(this.w*0.75,this.h*0.14, 'page1').setScale(0.25)
@@ -293,12 +360,14 @@ class LibraryPagePuzzle extends Phaser.Scene {
       let next = this.add.rectangle(this.w*0.1,this.h*0.72,this.w*0.1, this.h*0.1, 0xf57542).setAlpha(0.65)
         .setInteractive({useHandCursor: true})
         .on('pointerdown', () => {
-          if (this.click == 1) {
+          if (this.click==2) {
+            this.shelves.destroy();
+            this.scene.start("Library");
+          }
+          if (this.pC) {
             this.correct.setAlpha(1);
             this.click = 2;
-          } else if (this.click==2) {
-          this.shelves.destroy();
-          this.scene.start("Library");
+            bookCheck = true;
           }
         });
 
@@ -312,7 +381,19 @@ class LibraryPagePuzzle extends Phaser.Scene {
         });
     let restartText = this.add.text(this.w*0.2, this.h*0.7, "Restart?", { fill: '#ffffff', setFont: 'Spartan' }).setFontSize(40);
   } 
-  update() {    }
+  update() {    
+      if(this.p1C){
+        if(this.p2C){
+          if(this.p3C){
+            if(this.p4C){
+              if(this.p5C){
+                if(this.p6C){
+                  this.pC = true;
+      }}}}}}
+      else{
+        this.pC = false;
+      }
+  }
 
   highlightPuzzle(piece1, piece2, piece3, piece4, piece5, piece6, color) {
     piece1.setStrokeStyle(5, color);
@@ -354,6 +435,10 @@ class LibraryPagePuzzle extends Phaser.Scene {
 class LibraryLockedDoor extends Phaser.Scene {
   constructor() {
     super('LibraryLockedDoor');
+    this.typingComplete = false;
+    this.text;
+    this.textToType = "You found the hidden chamber of\nthe library. Only true scholars\nwere able to reach it.\n\nClick the door to move inside.";
+    this.currentIndex;
   }
   preload() {
     this.load.image('door', './assets/library/lockeddoor.png');
@@ -364,16 +449,36 @@ class LibraryLockedDoor extends Phaser.Scene {
     this.cameras.main.setBackgroundColor('#001133');
     this.w = this.cameras.main.width;
     this.h = this.cameras.main.height;
+    this.text = this.add.text(this.w*0.6, this.h*0.1, "", {
+      fontFamily: 'Spartan'
+    }).setFontSize(50);
+    this.currentIndex = 0;
+    this.time.lastCharacterTime = 0;
     this.door = this.add.image(this.w*0.3,this.h*0.5, "door")
       .setInteractive({useHandCursor: true})
       .on('pointerdown', () => {
         this.door.destroy();
           this.scene.start("LibraryLock")
         });
-    this.add.text(this.w*0.6, this.h*0.1, "You found the hidden chamber of\nthe library. Only true scholars\nwere able to reach it.\n\nClick the door to move inside.", {
-      fontFamily: 'Spartan'
-    }).setFontSize(40);
   }
+
+  update(time) { //Text Scroll Speed
+    if (!this.typingComplete) {
+      // Check if there are characters left to type
+      if (this.currentIndex < this.textToType.length) {
+        // Add the next character to the text object
+        if (time > this.time.lastCharacterTime + 30) {
+          this.text.setText(this.text.text + this.textToType[this.currentIndex]);
+          this.currentIndex++;
+          this.time.lastCharacterTime = time; // Update the last character time
+        }
+      } else {
+        // Typing complete
+        this.typingComplete = true;
+      }
+    }
+  }
+
 }
 
 class LibraryLock extends Phaser.Scene {
@@ -399,7 +504,7 @@ class LibraryLock extends Phaser.Scene {
       this.shelves = this.add.image(this.w*0.5,this.h*0.2, "bookshelves").setAlpha(0.35).setScale(2).setDepth(-1);
 
       this.add.rectangle(this.w*0.49, this.h*0.85, this.w*0.9, this.h*0.2, 0xf57542).setAlpha(0.65);
-      this.help1 = this.add.text(this.w*0.05, this.h*0.77, "You will need to create a key that fits the lock...\nIn four words, how would you describe the lock?\nClick on the words shown above and then 'unlock'\n* Can restart if clicked the wrong words", {
+      this.help1 = this.add.text(this.w*0.075, this.h*0.77, "You will need to create a key that fits the lock...\nIn four words, how would you describe the lock?\nClick on the words shown above and then 'unlock'", {
         fontFamily: 'Spartan'
       }).setFontSize(48);
 
@@ -525,6 +630,7 @@ class LibraryBooks extends Phaser.Scene {
   }
 
   create() {
+    this.cameras.main.setBackgroundColor('#001133');
     this.cameras.main.fadeIn(400, 0, 0, 0);
 
     this.w = this.cameras.main.width;
@@ -534,7 +640,7 @@ class LibraryBooks extends Phaser.Scene {
     }).setScale(1.85);
 
     this.add.rectangle(this.w*0.49, this.h*0.85, this.w*0.9, this.h*0.2, 0x159685).setAlpha(0.75);
-    this.help1 = this.add.text(this.w*0.05, this.h*0.8, "Remeber the book the librarian told you to find.\nThe turquoise one.", {
+    this.help1 = this.add.text(this.w*0.075, this.h*0.8, "Remeber the book the librarian told you to find.\nThe turquoise one.", {
       fontFamily: 'Spartan'
     }).setFontSize(48);
 
