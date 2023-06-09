@@ -11,7 +11,7 @@ class Title extends Phaser.Scene {
 
     create() {
         this.bgm = this.sound.add('audioKey')
-        this.bgm .play({ loop: true, loopStart: 8.72, loopEnd: 43.60});
+        this.bgm.play({ loop: true, loopStart: 8.72, loopEnd: 43.60});
         this.cameras.main.fadeIn(400, 0, 0, 0);
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;

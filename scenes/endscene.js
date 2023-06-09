@@ -184,14 +184,15 @@ class Fight extends Phaser.Scene {
                 }
                 if (touch == 2) {
                     this.count = 2;
+                    this.attack2.setAlpha(0);
                 }
                 if (this.count == 2) {
+                    this.attack2.setAlpha(0);
                     this.awake -= 15 + this.dmg;
                     this.turn = 1;
                     this.t = 2;
                     this.count = 0;
                     this.turn1instructions.setAlpha(1);
-
                 }
             }
             // Turn 3: click blue, gold, light gold
@@ -201,12 +202,15 @@ class Fight extends Phaser.Scene {
                     this.count = 1;
                 }
                 if (touch == 3) {
+                    this.attack3.setAlpha(0);
                     this.count = 2;
                 }
                 if (touch == 4) {
+                    this.attack3.setAlpha(0);
                     this.count = 3;
                 }
                 if (this.count == 3) {
+                    this.attack3.setAlpha(0);
                     this.awake -= 25 + this.dmg;
                     this.turn = 1;
                     this.t = 3;
@@ -222,15 +226,19 @@ class Fight extends Phaser.Scene {
                     this.count = 1;
                 }
                 if (touch == 4 && this.count == 1) {
+                    this.attack4.setAlpha(0);
                     this.count = 2;
                 }
                 if (touch == 3 && this.count == 2) {
+                    this.attack4.setAlpha(0);
                     this.count = 3;
                 }
                 if (touch == 4 && this.count == 3) {
+                    this.attack4.setAlpha(0);
                     this.count = 4;
                 }
                 if (this.count == 4) {
+                    this.attack4.setAlpha(0);
                     this.awake -= 30 + this.dmg;
                     this.turn = 1;
                     this.t = 4;
