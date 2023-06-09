@@ -5,10 +5,13 @@ class Title extends Phaser.Scene {
 
     preload() {
         this.load.image('bg', './assets/titlePage.png'); 
-        this.load.image('bgText', './assets/titleText.png'); 
+        this.load.image('bgText', './assets/titleText.png');
+        this.load.audio('audioKey', './assets/chill_parts.wav') 
     }
 
     create() {
+        this.bgm = this.sound.add('audioKey')
+        this.bgm .play({ loop: true, loopStart: 8.72, loopEnd: 43.60});
         this.cameras.main.fadeIn(400, 0, 0, 0);
         this.w = this.cameras.main.width;
         this.h = this.cameras.main.height;
@@ -94,7 +97,7 @@ class Credits extends Phaser.Scene {
 
     this.bg = this.add.image(this.w*0.5,this.h*0.5, "bg").setScale(1.35);
 
-    this.add.text(400, 100, "Main Coder: Mika Peer Shalem\nSupport Coder: Regis Pak\nMain Artist: Yize Ma\nSupport Artist: Jinhao Pan", {
+    this.add.text(400, 100, "Main Coder: Mika Peer Shalem\nCoder / Music: Regis Pak\nMain Artist: Yize Ma\nSupport Artist: Jinhao Pan", {
       fontFamily: 'Spartan'
     }).setFontSize(90);
 
