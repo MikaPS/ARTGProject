@@ -94,7 +94,7 @@ class Credits extends Phaser.Scene {
 
     this.bg = this.add.image(this.w*0.5,this.h*0.5, "bg").setScale(1.35);
 
-    this.add.text(400, 100, "Main Coder: Mika Peer Shalem\nSupport Coder: Regis Pak\nMain Artist: Yize Ma\nSupprt Artist: Jinhao Pan", {
+    this.add.text(400, 100, "Main Coder: Mika Peer Shalem\nSupport Coder: Regis Pak\nMain Artist: Yize Ma\nSupport Artist: Jinhao Pan", {
       fontFamily: 'Spartan'
     }).setFontSize(90);
 
